@@ -9,3 +9,5 @@ export default class Nutforms {
     }
 
 }
+
+window.Nutforms = Nutforms;
