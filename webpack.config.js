@@ -10,7 +10,10 @@ module.exports = {
         loaders: [
             {
                 test: path.join(__dirname, 'src'),
-                loader: 'babel-loader'
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015']
+                }
             }
         ]
     }
