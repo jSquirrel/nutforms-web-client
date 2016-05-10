@@ -5,6 +5,7 @@ export default class AttributeBuilder {
     constructor() {
         this.name = null;
         this.type = null;
+        this.value = null;
         this.primary = false;
         this.localization = null;
     }
@@ -19,6 +20,11 @@ export default class AttributeBuilder {
         return this;
     }
 
+    setValue(value) {
+        this.value = value;
+        return this;
+    }
+
     setPrimary(primary) {
         this.primary = primary;
         return this;
@@ -26,15 +32,22 @@ export default class AttributeBuilder {
 
     /**
      * @param {AttributeLocalization} localization
+     * @returns {AttributeBuilder}
      */
     addLocalization(localization) {
         this.localization = localization;
+        return this;
     }
 
+    /**
+     * Builds and returns the Attribute.
+     * @returns {Attribute}
+     */
     build() {
         return new Attribute(
             this.name,
             this.type,
+            this.value,
             this.primary,
             this.localization
         );

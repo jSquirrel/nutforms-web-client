@@ -5,18 +5,28 @@ let chai = require('chai')
 
 chai.should();
 
-import Attribute from '../../src/model/Attribute.js';
+import AttributeBuilder from '../../src/model/AttributeBuilder.js';
 import AttributeLocalization from '../../src/model/AttributeLocalization.js';
 
-describe('Attribute', () => {
-    describe('#constructor', () => {
-        it('initializes the parameters and binds the components', () => {
+
+describe('AttributeBuilder', () => {
+    describe('#build', () => {
+        it('creates Attribute with given parameters', () => {
+            let attributeBuilder = new AttributeBuilder();
             let name = "name";
             let type = "type";
             let value = "value";
             let primary = false;
             let localization = new AttributeLocalization("label", "placeholder");
-            let attribute = new Attribute(name, type, value, primary, localization);
+
+            let attribute = attributeBuilder
+                .setName(name)
+                .setType(type)
+                .setValue(value)
+                .setPrimary(primary)
+                .addLocalization(localization)
+                .build();
+
             attribute.name.should.equal(name);
             attribute.type.should.equal(type);
             attribute.value.should.equal(value);
