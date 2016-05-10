@@ -1,3 +1,4 @@
+
 export default class AttributeLocalization {
 
     /**
@@ -10,7 +11,6 @@ export default class AttributeLocalization {
     }
 
     /**
-     *
      * @param {Attribute} attribute
      * @returns {AttributeLocalization}
      */

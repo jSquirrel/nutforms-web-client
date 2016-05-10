@@ -5,7 +5,7 @@ let chai = require('chai')
 
 chai.should();
 
-import AttributeLocalization from '../../src/model/AttributeLocalization';
+import AttributeLocalization from '../../src/model/AttributeLocalization.js';
 
 describe('AttributeLocalization', () => {
 
