@@ -7,7 +7,7 @@ let chai = require('chai')
 chai.should();
 chai.expect();
 
-import ValuesParser from '../../src/parser/ValuesParser.js';
+import LocalizationParser from '../../src/parser/LocalizationParser.js';
 import ModelBuilder from '../../src/model/ModelBuilder.js'
 
 describe('ValuesParser', () => {
@@ -15,10 +15,10 @@ describe('ValuesParser', () => {
         let parser;
 
         beforeEach(() => {
-            parser = new ValuesParser();
+            parser = new LocalizationParser();
         });
 
-        it('parses JSON and adds values to ModelBuilder\'s AttributeBuilders', () => {
+        it('parses JSON adds localization to ModelBuilder and its AttributeBuilders', () => {
 
             let modelBuilder = new ModelBuilder();
             modelBuilder.getAttributeBuilder("id");
@@ -28,29 +28,34 @@ describe('ValuesParser', () => {
 
             parser.parse(
                 '{' +
-                '"id": 1,' +
-                '"description": "lorem",' +
-                '"log": "ipsum",' +
-                '"project": 1' +
+                '"form.label": "form label",' +
+                '"form.submit.value": "form submit label",' +
+                '"form.id.label": "id",' +
+                '"form.description.label": "description",' +
+                '"form.log.label": "log",' +
+                '"form.project.label": "project"' +
                 '}',
                 modelBuilder
             );
 
+            modelBuilder.localization.formLabel.should.equal("form label");
+            modelBuilder.localization.submitLabel.should.equal("form submit label");
+
             let attributeBuilders = modelBuilder.attributeBuilders;
 
             expect(attributeBuilders).to.have.property('id');
-            attributeBuilders.id.value.should.equal(1);
+            attributeBuilders.id.localization.label.should.equal("id");
 
             expect(attributeBuilders).to.have.property('description');
-            attributeBuilders.description.value.should.equal("lorem");
+            attributeBuilders.description.localization.label.should.equal("description");
 
             expect(attributeBuilders).to.have.property('log');
-            attributeBuilders.log.value.should.equal("ipsum");
+            attributeBuilders.log.localization.label.should.equal("log");
 
             let relationBuilders = modelBuilder.relationBuilders;
 
-            expect(relationBuilders).to.have.property("project");
-            relationBuilders.project.value.should.equal(1);
+            expect(relationBuilders).to.have.property('project');
+            relationBuilders.project.localization.label.should.equal("project");
         });
     });
 });
