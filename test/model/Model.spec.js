@@ -7,6 +7,7 @@ chai.should();
 
 import Model from '../../src/model/Model.js';
 import ModelLocalization from '../../src/model/ModelLocalization.js';
+import ModelRenderer from '../../src/model/ModelRenderer.js';
 
 describe('Model', () => {
     describe('#constructor', () => {
@@ -16,11 +17,15 @@ describe('Model', () => {
             let primary = false;
 
             let localization = new ModelLocalization("form label", "submit label");
-            let model = new Model(attributes, relations, localization);
+            let renderer = new ModelRenderer();
+            let model = new Model(attributes, relations, localization, renderer);
 
             model.attributes.should.equal(attributes);
             model.relations.should.equal(relations);
+            model.localization.should.equal(localization);
+            model.renderer.should.equal(renderer);
             localization.model.should.equal(model);
+            renderer.model.should.equal(model);
         });
     });
 });
