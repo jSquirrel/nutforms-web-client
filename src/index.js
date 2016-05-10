@@ -1,3 +1,8 @@
-document.write("It works!");
 
-// TODO: implement the Nutforms
+class Nutforms {
+
+    static generateForm() {
+        document.write("It works!");
+    }
+
+}

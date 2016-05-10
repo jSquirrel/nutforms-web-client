@@ -1,6 +1,5 @@
 {
   "name": "nutforms-web",
-
   "version": "1.0.0",
   "description": "Nutforms Client library for web applications",
   "main": "src/index.js",
@@ -16,6 +15,11 @@
   "bugs": {
     "url": "https://github.com/jSquirrel/nutforms-web-client/issues"
   },
-  "homepage": "https://github.com/jSquirrel/nutforms-web-client#readme"
+  "homepage": "https://github.com/jSquirrel/nutforms-web-client#readme",
+  "devDependencies": {
+    "babel-core": "^6.8.0",
+    "babel-loader": "^6.2.4",
+    "path": "^0.12.7",
+    "webpack": "^1.13.0"
+  }
 }
-
