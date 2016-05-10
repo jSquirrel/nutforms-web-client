@@ -20,11 +20,19 @@ export default class ModelStructureParser {
                     .setName(attribute.name)
                     .setType(attribute.type)
                     .setPrimary(attribute.is_primary);
-
             });
         }
 
-        // TODO: relations
+
+        if (metadata.hasOwnProperty("relationships")) {
+            metadata.relationships.forEach((relation) => {
+                let attributeBuilder = modelBuilder.getRelationBuilder(relation.name);
+                attributeBuilder
+                    .setName(relation.name)
+                    .setType(relation.type)
+                    .setTargetEntity(relation.target_entity);
+            });
+        }
     }
 
 }

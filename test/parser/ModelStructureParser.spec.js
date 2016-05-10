@@ -45,7 +45,7 @@ describe('ModelStructureParser', () => {
                 '{' +
                 '"name": "project",' +
                 '"type": "ToOne",' +
-                '"target_entity": "cz. cvut.fel.nutforms.example.model.Project"' +
+                '"target_entity": "cz.cvut.fel.nutforms.example.model.Project"' +
                 '}' +
                 ']' +
                 '}',
@@ -66,7 +66,12 @@ describe('ModelStructureParser', () => {
             attributeBuilders.log.name.should.equal("log");
             attributeBuilders.log.type.should.equal("java.lang.String");
 
-            // TODO: relation builders
+            let relationBuilders = modelBuilder.relationBuilders;
+
+            expect(relationBuilders).to.have.property("project");
+            relationBuilders.project.name.should.equal("project");
+            relationBuilders.project.type.should.equal("ToOne");
+            relationBuilders.project.targetEntity.should.equal("cz.cvut.fel.nutforms.example.model.Project")
         });
     });
 });
