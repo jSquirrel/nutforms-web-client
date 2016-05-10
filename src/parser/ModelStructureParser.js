@@ -7,33 +7,24 @@ import RelationBuilder from './../model/RelationBuilder.js'
 export default class ModelStructureParser {
 
     /**
-     *
      * @param {string} rawMetadata
-     * @returns {{attributeBuilders: AttributeBuilder[], relationBuilders: RelationBuilder[]}}
+     * @param {ModelBuilder} modelBuilder
      */
-    parse(rawMetadata) {
+    parse(rawMetadata, modelBuilder) {
         let metadata = JSON.parse(rawMetadata);
-        let attributeBuilders = [];
-        let relationBuilders = [];
 
         if (metadata.hasOwnProperty("attributes")) {
             metadata.attributes.forEach((attribute) => {
-                let attributeBuilder = new AttributeBuilder();
+                let attributeBuilder = modelBuilder.getAttributeBuilder(attribute.name);
                 attributeBuilder
                     .setName(attribute.name)
                     .setType(attribute.type)
                     .setPrimary(attribute.is_primary);
 
-                attributeBuilders[attribute.name] = attributeBuilder;
             });
         }
 
         // TODO: relations
-
-        return {
-            attributeBuilders: attributeBuilders,
-            relationBuilders: relationBuilders
-        };
     }
 
 }

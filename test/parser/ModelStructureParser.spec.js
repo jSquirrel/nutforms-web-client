@@ -8,9 +8,9 @@ chai.should();
 chai.expect();
 
 import ModelStructureParser from '../../src/parser/ModelStructureParser.js';
-import AttributeLocalization from '../../src/model/AttributeLocalization.js';
+import ModelBuilder from '../../src/model/ModelBuilder.js'
 
-describe('ModelSctructureParser', () => {
+describe('ModelStructureParser', () => {
     describe('#parse', () => {
         let parser;
 
@@ -19,6 +19,9 @@ describe('ModelSctructureParser', () => {
         });
 
         it('parses JSON and creates array of AttributeBuilders and RelationBuilders', () => {
+
+            let modelBuilder = new ModelBuilder();
+
             let builders = parser.parse(
                 '{' +
                 '"attributes": [' +
@@ -45,10 +48,11 @@ describe('ModelSctructureParser', () => {
                 '"target_entity": "cz. cvut.fel.nutforms.example.model.Project"' +
                 '}' +
                 ']' +
-                '}'
+                '}',
+                modelBuilder
             );
 
-            let attributeBuilders = builders.attributeBuilders;
+            let attributeBuilders = modelBuilder.attributeBuilders;
 
             expect(attributeBuilders).to.have.property('id');
             attributeBuilders.id.name.should.equal("id");
