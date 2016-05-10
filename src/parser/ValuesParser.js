@@ -1,10 +1,11 @@
 export default class ValuesParser {
 
     /**
-     * @param {object} values
+     * @param {object} rawValues
      * @param {ModelBuilder} modelBuilder
      */
-    parse(values, modelBuilder) {
+    parse(rawValues, modelBuilder) {
+        let values = JSON.parse(rawValues);
         Object.keys(values).forEach((key) => {
             if (modelBuilder.hasAttributeBuilder(key)) {
                 modelBuilder.getAttributeBuilder(key).setValue(values[key]);

@@ -22,7 +22,7 @@ describe('ModelStructureParser', () => {
 
             let modelBuilder = new ModelBuilder();
 
-            let builders = parser.parse(
+            parser.parse(
                 '{' +
                 '"attributes": [' +
                 '{' +
