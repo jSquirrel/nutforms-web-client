@@ -8,14 +8,16 @@ export default class Attribute extends Observable {
      * @param {*} value
      * @param {boolean} primary
      * @param {AttributeLocalization} localization
+     * @param {AttributeRenderer} renderer
      */
-    constructor(name, type, value, primary, localization) {
+    constructor(name, type, value, primary, localization, renderer) {
         super();
         this.name = name;
         this.type = type;
         this.value = value;
         this.primary = primary;
         this.localization = localization ? localization.bind(this) : null;
+        this.renderer = renderer ? renderer.bind(this) : null;
     }
 
 }

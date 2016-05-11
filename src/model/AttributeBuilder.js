@@ -1,4 +1,5 @@
 import Attribute from './Attribute.js'
+import AttributeRenderer from './AttributeRenderer.js'
 
 export default class AttributeBuilder {
 
@@ -30,6 +31,11 @@ export default class AttributeBuilder {
         return this;
     }
 
+    addRenderer(renderer) {
+        this.renderer = renderer;
+        return this;
+    }
+
     /**
      * @param {AttributeLocalization} localization
      * @returns {AttributeBuilder}
@@ -49,7 +55,8 @@ export default class AttributeBuilder {
             this.type,
             this.value,
             this.primary,
-            this.localization
+            this.localization,
+            this.renderer ? this.renderer : new AttributeRenderer() // TODO: remove wired instantiation
         );
     }
 

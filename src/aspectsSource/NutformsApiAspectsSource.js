@@ -62,7 +62,7 @@ export default class NutformsApiAspectsSource {
     }
 
     getLocalizationData(entityName, locale) {
-        return fetch(this._buildUrl(this.LOCALIZATION_ENDPOINT + locale + '/' + entityName + '/edit')) // TODO: remove the context
+        return fetch(this._buildUrl(this.LOCALIZATION_ENDPOINT + locale + '/' + entityName + '/new')) // TODO: remove the context
             .then(this._toJson)
             .then(this._logResponse("Localization data loaded from API"))
             ;

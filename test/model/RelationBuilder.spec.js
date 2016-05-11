@@ -7,6 +7,7 @@ chai.should();
 
 import RelationBuilder from '../../src/model/RelationBuilder.js';
 import AttributeLocalization from '../../src/model/AttributeLocalization.js';
+import AttributeRenderer from '../../src/model/AttributeRenderer.js'
 
 
 describe('RelationBuilder', () => {
@@ -18,6 +19,7 @@ describe('RelationBuilder', () => {
             let value = "value";
             let primary = false;
             let localization = new AttributeLocalization("label", "placeholder");
+            let renderer = new AttributeRenderer();
             let targetEntity = "targetEntity";
 
             let relation = relationBuilder
@@ -26,6 +28,7 @@ describe('RelationBuilder', () => {
                 .setValue(value)
                 .setPrimary(primary)
                 .addLocalization(localization)
+                .addRenderer(renderer)
                 .setTargetEntity(targetEntity)
                 .build();
 
@@ -34,8 +37,10 @@ describe('RelationBuilder', () => {
             relation.value.should.equal(value);
             relation.primary.should.equal(primary);
             relation.localization.should.equal(localization);
-            relation.targetEntity.should.equal(targetEntity);
             localization.attribute.should.equal(relation);
+            relation.renderer.should.equal(renderer);
+            renderer.attribute.should.equal(relation);
+            relation.targetEntity.should.equal(targetEntity);
         });
     });
 });

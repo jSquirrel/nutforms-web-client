@@ -1,3 +1,4 @@
+import AttributeIterator from './AttributeIterator.js'
 
 export default class ModelRenderer {
 
@@ -18,19 +19,60 @@ export default class ModelRenderer {
      * @param {HTMLElement} htmlElement
      */
     render(htmlElement) {
-        var output = "<form>";
+        let parser = new DOMParser();
+        let layoutDOM = parser.parseFromString(this.model.layout.layoutString, "text/html");
+        let attributeIterator = new AttributeIterator(this.model);
 
-        output += "<h2>" + this.model.localization.formLabel + "</h2>";
-
-        Object.keys(this.model.attributes).forEach((key) => {
-            let attribute = this.model.attributes[key];
-            output += attribute.localization.label + ": <input value=\"" + attribute.value + "\"/>"
+        // Add form label
+        DOMHelper.findElementsWithAttribute(layoutDOM, "nf-form-label").forEach((formLabel) => {
+            formLabel.innerHTML = this.model.localization.formLabel;
         });
 
-        output += "<input type='submit' value='" + this.model.localization.submitLabel + "' />";
+        // Add explicit first
+        DOMHelper.findElementsWithAttribute(layoutDOM, "nf-field-widget").forEach((field) => {
+            let attributeName = field.getAttribute("nf-field-widget");
+            let attribute = attributeIterator.getByName(attributeName);
+            if (attribute) {
+                attribute.renderer.render(field);
+            }
+        });
 
-        output += "</form>";
-        htmlElement.innerHTML = output;
+        // Add implicit
+        while(attributeIterator.hasNext()) {
+            let attribute = attributeIterator.getNext();
+            let element = document.createElement("div");
+            attribute.renderer.render(element);
+            let forms = layoutDOM.getElementsByTagName("form");
+            for (let i = 0; i < forms.length; i++) {
+                forms[i].appendChild(element);
+            }
+        }
+        // TODO: add attributes
+        // TODO: submit
+
+        htmlElement.innerHTML = new XMLSerializer().serializeToString(layoutDOM);
+    }
+
+}
+
+class DOMHelper {
+
+    /**
+     * Finds all elements in the document which have attribute with given name.
+     *
+     * @param {Element|HTMLDocument} doc
+     * @param {string} attribute
+     * @returns {Array}
+     */
+    static findElementsWithAttribute(doc, attribute) {
+        let matchingElements = [];
+        let allElements = doc.getElementsByTagName('*');
+        for (var i = 0, n = allElements.length; i < n; i++) {
+            if (allElements[i].getAttribute(attribute) !== null) {
+                matchingElements.push(allElements[i]);
+            }
+        }
+        return matchingElements;
     }
 
 }

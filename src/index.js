@@ -2,6 +2,7 @@ import NutformsApiAspectsSource from './aspectsSource/NutformsApiAspectsSource.j
 
 import ModelBuilder from './model/ModelBuilder.js'
 import ModelRenderer from './model/ModelRenderer.js'
+import Layout from './model/Layout.js'
 
 
 import ModelStructureParser from './parser/ModelStructureParser.js'
@@ -18,25 +19,25 @@ export default class Nutforms {
         this.aspectsSource = source;
     }
 
-    generateForm(htmlElement, entityName, locale, entityId, layout, widgetMapping) {
+    generateForm(htmlElement, entityName, locale, entityId, layout, widgetMapping, context) {
         Promise.all([
             this.aspectsSource.getStructureMetadata(entityName),
             this.aspectsSource.getLocalizationData(entityName, locale),
-            this.aspectsSource.getValues(entityName, entityId)
+            this.aspectsSource.getValues(entityName, entityId),
+            this.aspectsSource.getLayout(layout)
             // TODO: layout, widgets?
         ]).then((values) => {
             let model = this.buildModel(
                 values.shift(),
                 values.shift(),
+                values.shift(),
                 values.shift()
             );
-            model.renderer = new ModelRenderer();
-            model.renderer.bind(model);
             model.renderer.render(htmlElement);
         });
     }
 
-    buildModel(structureMetadata, localizationData, values) {
+    buildModel(structureMetadata, localizationData, values, layout) {
 
         console.log(structureMetadata, localizationData, values);
 
@@ -49,6 +50,9 @@ export default class Nutforms {
         structureParser.parse(structureMetadata, builder);
         valuesParser.parse(values, builder);
         localizationParser.parse(localizationData, builder);
+
+        builder.addRenderer(new ModelRenderer());
+        builder.addLayout(new Layout(layout));
 
         return builder.build();
     }

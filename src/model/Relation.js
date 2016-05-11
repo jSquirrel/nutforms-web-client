@@ -10,8 +10,8 @@ export default class Relation extends Attribute {
      * @param {AttributeLocalization} localization
      * @param {string} targetEntity
      */
-    constructor(name, type, value, primary, localization, targetEntity) {
-        super(name, type, value, primary, localization);
+    constructor(name, type, value, primary, localization, relation, targetEntity) {
+        super(name, type, value, primary, localization, relation);
         this.targetEntity = targetEntity;
     }
 
