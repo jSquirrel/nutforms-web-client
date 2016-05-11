@@ -63,7 +63,7 @@ export default class ModelBuilder {
 
     /**
      * @private
-     * @returns {Array}
+     * @returns {Object}
      */
     buildAttributes() {
         let attributes = {};
@@ -76,7 +76,7 @@ export default class ModelBuilder {
 
     /**
      * @private
-     * @returns {Array}
+     * @returns {Object}
      */
     buildRelations() {
         let relations = {};

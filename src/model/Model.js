@@ -9,6 +9,13 @@ export default class Model extends Observable {
         this.localization = localization ? localization.bind(this) : localization;
         this.renderer = renderer ? renderer.bind(this) : renderer;
         this.layout = layout ? layout.bind(this) : layout;
+
+        Object.keys(attributes).forEach((key) => {
+            this.attributes[key].bind(this);
+        });
+        Object.keys(relations).forEach((key) => {
+            this.relations[key].bind(this);
+        });
     }
 
 }

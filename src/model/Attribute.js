@@ -18,6 +18,17 @@ export default class Attribute extends Observable {
         this.primary = primary;
         this.localization = localization ? localization.bind(this) : null;
         this.renderer = renderer ? renderer.bind(this) : null;
+        this.model = null;
+    }
+
+    /**
+     * Binds to the given Model.
+     * @param {Model} model
+     * @returns {Attribute}
+     */
+    bind(model) {
+        this.model = model;
+        return this;
     }
 
 }

@@ -12,8 +12,30 @@ import ModelRenderer from '../../src/model/ModelRenderer.js';
 describe('Model', () => {
     describe('#constructor', () => {
         it('initializes the parameters and binds the components', () => {
-            let attributes = ["attr1", "attr2"];
-            let relations = ["rel1", "rel2"];
+            let attributes = [
+                {
+                    name: "attr1",
+                    _bindCalled: false,
+                    bind: function(model) {
+                        this._bindCalled = true;
+                    }
+                },
+                {
+                    name: "attr2",
+                    _bindCalled: false,
+                    bind: function(model) {
+                        this._bindCalled = true;
+                    }
+                }
+            ];
+            let relations = [
+                {
+                    name: "rel1",
+                    _bindCalled: false,
+                    bind: function(model) {
+                        this._bindCalled = true;
+                    }
+                }];
             let primary = false;
 
             let localization = new ModelLocalization("form label", "submit label");
@@ -26,6 +48,10 @@ describe('Model', () => {
             model.renderer.should.equal(renderer);
             localization.model.should.equal(model);
             renderer.model.should.equal(model);
+
+            attributes[0]._bindCalled.should.equal(true);
+            attributes[1]._bindCalled.should.equal(true);
+            relations[0]._bindCalled.should.equal(true);
         });
     });
 });
