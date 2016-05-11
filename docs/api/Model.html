@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ModelLocalization</title>
+    <title>JSDoc: Class: Model</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ModelLocalization</h1>
+    <h1 class="page-title">Class: Model</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>ModelLocalization</h2>
+        <h2>Model</h2>
         
     
 </header>
@@ -40,14 +40,14 @@
 
     
 
-    <h4 class="name" id="ModelLocalization"><span class="type-signature"></span>new ModelLocalization<span class="signature">(formLabel, submitLabel)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Model"><span class="type-signature"></span>new Model<span class="signature">(entityName, attributes, relations, localization, renderer, layout, aspectsSource, widgetMapping, context)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Holds localization aspect data for Model.
+    Represents a Model and holds all its components and contextual parameters.
 </div>
 
 
@@ -83,7 +83,7 @@
 
         <tr>
             
-                <td class="name"><code>formLabel</code></td>
+                <td class="name"><code>entityName</code></td>
             
 
             <td class="type">
@@ -99,14 +99,175 @@
 
             
 
-            <td class="description last">Label of the form.</td>
+            <td class="description last">Name of the represented entity-</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>submitLabel</code></td>
+                <td class="name"><code>attributes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Map of Model's Attributes.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>relations</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Map of Model's Relations.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>localization</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ModelLocalization.html">ModelLocalization</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Localization of the Model.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>renderer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ModelRenderer.html">ModelRenderer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Renderer of the Model.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>layout</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Layout.html">Layout</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Layout of the Model.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>aspectsSource</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">AspectsResource instance.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>widgetMapping</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Widget mapping function.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>context</code></td>
             
 
             <td class="type">
@@ -122,7 +283,7 @@
 
             
 
-            <td class="description last">Label of form's submit button.</td>
+            <td class="description last">Business operation identifier.</td>
         </tr>
 
     
@@ -163,7 +324,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model_ModelLocalization.js.html">model/ModelLocalization.js</a>, <a href="model_ModelLocalization.js.html#line8">line 8</a>
+        <a href="model_Model.js.html">model/Model.js</a>, <a href="model_Model.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -204,159 +365,6 @@
 
     
 
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="bind"><span class="type-signature"></span>bind<span class="signature">(model)</span><span class="type-signature"> &rarr; {<a href="ModelLocalization.html">ModelLocalization</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Binds to Model instance.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>model</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Model.html">Model</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The Model to bind to.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model_ModelLocalization.js.html">model/ModelLocalization.js</a>, <a href="model_ModelLocalization.js.html#line18">line 18</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="ModelLocalization.html">ModelLocalization</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
     
 
     

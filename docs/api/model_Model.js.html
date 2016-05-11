@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: model/Attribute.js</title>
+    <title>JSDoc: Source: model/Model.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: model/Attribute.js</h1>
+    <h1 class="page-title">Source: model/Model.js</h1>
 
     
 
@@ -28,36 +28,38 @@
         <article>
             <pre class="prettyprint source linenums"><code>import Observable from './Observable.js'
 
-export default class Attribute extends Observable {
+export default class Model extends Observable {
 
     /**
-     * Represents Attribute of Nutforms Rich Model.
-     * @param {string} name                         Unique name of the Attribute. Also servers as identifier.
-     * @param {string} type                         Type of the Attribute.
-     * @param {*} value                             Value of the Attribute. Can be null.
-     * @param {boolean} primary                     Is this the primary Attribute of the Model?
-     * @param {AttributeLocalization} localization  Localization of the Attribute.
-     * @param {AttributeRenderer} renderer          Renderer of the Attribute.
+     * Represents a Model and holds all its components and contextual parameters.
+     * @param {string} entityName               Name of the represented entity-
+     * @param {object} attributes               Map of Model's Attributes.
+     * @param {object} relations                Map of Model's Relations.
+     * @param {ModelLocalization} localization  Localization of the Model.
+     * @param {ModelRenderer} renderer          Renderer of the Model.
+     * @param {Layout} layout                   Layout of the Model.
+     * @param {object} aspectsSource            AspectsResource instance.
+     * @param {function} widgetMapping          Widget mapping function.
+     * @param {string} context                  Business operation identifier.
      */
-    constructor(name, type, value, primary, localization, renderer) {
+    constructor(entityName, attributes, relations, localization, renderer, layout, aspectsSource, widgetMapping, context) {
         super();
-        this.name = name;
-        this.type = type;
-        this.value = value;
-        this.primary = primary;
-        this.localization = localization ? localization.bind(this) : null;
-        this.renderer = renderer ? renderer.bind(this) : null;
-        this.model = null;
-    }
+        this.entityName = entityName;
+        this.attributes = attributes;
+        this.relations = relations;
+        this.localization = localization ? localization.bind(this) : localization;
+        this.renderer = renderer ? renderer.bind(this) : renderer;
+        this.layout = layout ? layout.bind(this) : layout;
+        this.aspectsSource = aspectsSource;
+        this.widgetMapping = widgetMapping;
+        this.context = context;
 
-    /**
-     * Binds to the given Model instance.
-     * @param {Model} model The instance of Model to bind to.
-     * @returns {Attribute}
-     */
-    bind(model) {
-        this.model = model;
-        return this;
+        Object.keys(attributes).forEach((key) => {
+            this.attributes[key].bind(this);
+        });
+        Object.keys(relations).forEach((key) => {
+            this.relations[key].bind(this);
+        });
     }
 
 }

@@ -1,5 +1,11 @@
 export default class Observable {
 
+    /**
+     * Observable object.
+     * Listeners can subscribe to this object and
+     * receive event notifications.
+     * @abstract
+     */
     constructor() {
         this._observers = {
             "all": []
@@ -8,7 +14,6 @@ export default class Observable {
 
     /**
      * Subscribes an observer object or function to an event of the Observable.
-     *
      * @param {string} event
      * @param {function|object} observer
      */
@@ -21,7 +26,6 @@ export default class Observable {
 
     /**
      * Unsubscribes an observer object or function from an event of the Observable.
-     *
      * @param {string} event
      * @param {function|object} observer
      */
@@ -36,7 +40,6 @@ export default class Observable {
 
     /**
      * Triggers an event with given name and with given parameters on the Observable.
-     *
      * @param {string} event
      * @param {...*} argument
      */
@@ -51,7 +54,6 @@ export default class Observable {
 
     /**
      * Invokes all observers subscribed to given event name.
-     *
      * @param {string} eventName
      * @param {Array} args
      * @private

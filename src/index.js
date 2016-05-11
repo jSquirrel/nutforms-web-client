@@ -32,10 +32,10 @@ export default class Nutforms {
      */
     generateForm(htmlElement, entityName, locale, entityId, layout, widgetMapping, context) {
         Promise.all([
-            this.aspectsSource.getStructureMetadata(entityName),
-            this.aspectsSource.getLocalizationData(entityName, locale),
-            this.aspectsSource.getValues(entityName, entityId),
-            this.aspectsSource.getLayout(layout)
+            this.aspectsSource.fetchStructureMetadata(entityName),
+            this.aspectsSource.fetchLocalizationData(entityName, locale),
+            this.aspectsSource.fetchValues(entityName, entityId),
+            this.aspectsSource.fetchLayout(layout)
         ]).then((values) => {
             let model = this.buildModel(...values, entityName, widgetMapping, context);
             model.renderer.render(htmlElement);

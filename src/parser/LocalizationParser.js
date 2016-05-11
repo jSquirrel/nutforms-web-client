@@ -4,13 +4,17 @@ import AttributeLocalization from './../model/AttributeLocalization'
 export default class LocalizationParser {
 
     /**
-     * @param {string} rawLocalizationData
-     * @param {ModelBuilder} modelBuilder
+     * Localization aspect parser.
      */
-    parse(rawLocalizationData, modelBuilder) {
-        // let localizationData = JSON.parse(rawLocalizationData);
-        let localizationData = rawLocalizationData;
+    constructor() {
+    }
 
+    /**
+     * Parses localization aspect data and calls appropriate methods on ModelBuilder.
+     * @param {string} localizationData     Localization aspect data.
+     * @param {ModelBuilder} modelBuilder   ModelBuilder instance.
+     */
+    parse(localizationData, modelBuilder) {
         modelBuilder.addLocalization(new ModelLocalization(
             localizationData["form.label"],
             localizationData["form.submit.value"]

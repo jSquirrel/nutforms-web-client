@@ -2,8 +2,9 @@
 export default class AttributeLocalization {
 
     /**
-     * @param {string} label
-     * @param {string} placeholder
+     * Contains Localization aspect data for Attribute.
+     * @param {string} label        Label of the Attribute.
+     * @param {string} placeholder  Placeholder of the Attribute.
      */
     constructor(label, placeholder) {
         this.label = label;
@@ -11,7 +12,8 @@ export default class AttributeLocalization {
     }
 
     /**
-     * @param {Attribute} attribute
+     * Binds to Attribute instance.
+     * @param {Attribute} attribute The Attribute to bind to.
      * @returns {AttributeLocalization}
      */
     bind(attribute) {

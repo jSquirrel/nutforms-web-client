@@ -2,12 +2,16 @@ import AttributeIterator from './AttributeIterator.js'
 
 export default class ModelRenderer {
 
+    /**
+     * Renderer for Model.
+     */
     constructor() {
         this.model = null;
     }
 
     /**
-     * @param {Model} model
+     * Bins to Model instance.
+     * @param {Model} model The Model to bind to.
      * @returns {ModelRenderer}
      */
     bind(model) {
@@ -54,6 +58,8 @@ export default class ModelRenderer {
             "<div class=\"form-group\"><input type=\"submit\" class=\"btn btn-default\" nf-submit=\"submit\" value=\""
             + this.model.localization.submitLabel
             + "\" /></div>";
+
+        // TODO: bind listeners
 
         htmlElement.innerHTML = new XMLSerializer().serializeToString(layoutDOM) + submit;
     }

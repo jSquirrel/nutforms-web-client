@@ -1,13 +1,17 @@
 export default class ValuesParser {
 
     /**
-     * @param {object} rawValues
-     * @param {ModelBuilder} modelBuilder
+     * Model values parser.
      */
-    parse(rawValues, modelBuilder) {
-        // let values = JSON.parse(rawValues);
-        let values = rawValues;
+    constructor() {
+    }
 
+    /**
+     * Parses model values and calls appropriate methods on ModelBuilder.
+     * @param {object} values               Values of the model.
+     * @param {ModelBuilder} modelBuilder   ModelBuilder instance.
+     */
+    parse(values, modelBuilder) {
         Object.keys(values).forEach((key) => {
             if (modelBuilder.hasAttributeBuilder(key)) {
                 modelBuilder.getAttributeBuilder(key).setValue(values[key]);

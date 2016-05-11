@@ -1,9 +1,9 @@
-
 export default class ModelLocalization {
 
     /**
-     * @param {string} formLabel
-     * @param {string} submitLabel
+     * Holds localization aspect data for Model.
+     * @param {string} formLabel        Label of the form.
+     * @param {string} submitLabel      Label of form's submit button.
      */
     constructor(formLabel, submitLabel) {
         this.formLabel = formLabel;
@@ -11,7 +11,8 @@ export default class ModelLocalization {
     }
 
     /**
-     * @param {Model} model
+     * Binds to Model instance.
+     * @param {Model} model The Model to bind to.
      * @returns {ModelLocalization}
      */
     bind(model) {

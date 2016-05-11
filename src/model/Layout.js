@@ -1,7 +1,7 @@
-
 export default class Layout {
 
     /**
+     * Contains Layout aspect data for Model.
      * @param {string} layoutString
      */
     constructor(layoutString) {
@@ -10,7 +10,8 @@ export default class Layout {
     }
 
     /**
-     * @param {Model} model
+     * Binds to Model instance.
+     * @param {Model} model The Model to bind to.
      * @returns {Layout}
      */
     bind(model) {

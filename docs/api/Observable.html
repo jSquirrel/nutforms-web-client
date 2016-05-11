@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Attribute</title>
+    <title>JSDoc: Class: Observable</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Attribute</h1>
+    <h1 class="page-title">Class: Observable</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>Attribute</h2>
+        <h2>Observable</h2>
         
     
 </header>
@@ -40,14 +40,16 @@
 
     
 
-    <h4 class="name" id="Attribute"><span class="type-signature"></span>new Attribute<span class="signature">(name, type, value, primary, localization, renderer)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Observable"><span class="type-signature">(abstract) </span>new Observable<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Represents Attribute of Nutforms Rich Model.
+    Observable object.
+Listeners can subscribe to this object and
+receive event notifications.
 </div>
 
 
@@ -56,170 +58,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Unique name of the Attribute. Also servers as identifier.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Type of the Attribute.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Value of the Attribute. Can be null.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>primary</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Is this the primary Attribute of the Model?</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>localization</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="AttributeLocalization.html">AttributeLocalization</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Localization of the Attribute.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>renderer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="AttributeRenderer.html">AttributeRenderer</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Renderer of the Attribute.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -255,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model_Attribute.js.html">model/Attribute.js</a>, <a href="model_Attribute.js.html#line14">line 14</a>
+        <a href="model_Observable.js.html">model/Observable.js</a>, <a href="model_Observable.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -304,14 +142,14 @@
 
     
 
-    <h4 class="name" id="bind"><span class="type-signature"></span>bind<span class="signature">(model)</span><span class="type-signature"> &rarr; {<a href="Attribute.html">Attribute</a>}</span></h4>
+    <h4 class="name" id="listen"><span class="type-signature"></span>listen<span class="signature">(event, observer)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Binds to the given Model instance.
+    Subscribes an observer object or function to an event of the Observable.
 </div>
 
 
@@ -347,13 +185,13 @@
 
         <tr>
             
-                <td class="name"><code>model</code></td>
+                <td class="name"><code>event</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="Model.html">Model</a></span>
+<span class="param-type">string</span>
 
 
             
@@ -363,7 +201,33 @@
 
             
 
-            <td class="description last">The instance of Model to bind to.</td>
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>observer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
         </tr>
 
     
@@ -404,7 +268,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model_Attribute.js.html">model/Attribute.js</a>, <a href="model_Attribute.js.html#line30">line 30</a>
+        <a href="model_Observable.js.html">model/Observable.js</a>, <a href="model_Observable.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -427,24 +291,337 @@
 
 
 
-<h5>Returns:</h5>
+
+
 
         
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Attribute.html">Attribute</a></span>
-
-
-    </dd>
-</dl>
+            
 
     
+
+    <h4 class="name" id="trigger"><span class="type-signature"></span>trigger<span class="signature">(event, &hellip;argument)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Triggers an event with given name and with given parameters on the Observable.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>argument</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model_Observable.js.html">model/Observable.js</a>, <a href="model_Observable.js.html#line46">line 46</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="unsubscribe"><span class="type-signature"></span>unsubscribe<span class="signature">(event, observer)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Unsubscribes an observer object or function from an event of the Observable.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>observer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model_Observable.js.html">model/Observable.js</a>, <a href="model_Observable.js.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

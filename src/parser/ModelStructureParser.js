@@ -1,21 +1,17 @@
-import AttributeBuilder from './../model/AttributeBuilder.js'
-import RelationBuilder from './../model/RelationBuilder.js'
-
-
 export default class ModelStructureParser {
 
     /**
-     * @param {string} rawMetadata
-     * @param {ModelBuilder} modelBuilder
+     * Model structure aspect parser.
      */
-    parse(rawMetadata, modelBuilder) {
-        // try {
-        //     let metadata = JSON.parse(rawMetadata);
-        // } catch (e) {
-        //     console.error(e);
-        // }
-        let metadata = rawMetadata;
+    constructor() {
+    }
 
+    /**
+     * Parses model structure metadata and calls appropriate methods on ModelBuilder.
+     * @param {string} metadata             Model structure metadata.
+     * @param {ModelBuilder} modelBuilder   ModelBuilder instance.
+     */
+    parse(metadata, modelBuilder) {
         if (metadata.hasOwnProperty("attributes")) {
             metadata.attributes.forEach((attribute) => {
                 let attributeBuilder = modelBuilder.getAttributeBuilder(attribute.name);
@@ -25,8 +21,6 @@ export default class ModelStructureParser {
                     .setPrimary(attribute.is_primary);
             });
         }
-
-
         if (metadata.hasOwnProperty("relationships")) {
             metadata.relationships.forEach((relation) => {
                 let attributeBuilder = modelBuilder.getRelationBuilder(relation.name);

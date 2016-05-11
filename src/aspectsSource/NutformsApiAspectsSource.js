@@ -3,6 +3,7 @@ import 'whatwg-fetch'
 export default class NutformsApiAspectsSource {
 
     /**
+     * Retriever of aspects definitions from Nutforms Server REST API.
      * @param {string} apiAddress   URL of the API
      * @param {string} apiUser      Name of the API user
      * @param {string} apiPassword  Password of the API user
@@ -37,14 +38,25 @@ export default class NutformsApiAspectsSource {
         };
     }
 
-    getStructureMetadata(entityName) {
+    /**
+     * Fetches model structure metadata for entity.
+     * @param {string} entityName Name of the entity.
+     * @returns {Promise}
+     */
+    fetchStructureMetadata(entityName) {
         return fetch(this._buildUrl(this.CLASS_METADATA_ENDPOINT + entityName))
             .then(this._logResponse("Class metadata loaded from API"))
             .then(this._toJson)
             ;
     }
 
-    getValues(entityName, entityId) {
+    /**
+     * Fetches values of entity.
+     * @param {string} entityName Name of the entity.
+     * @param {number} entityId Identifier of the entity.
+     * @returns {Promise}
+     */
+    fetchValues(entityName, entityId) {
         if (entityId === null) {
             return Promise.resolve({});
         }
@@ -61,21 +73,37 @@ export default class NutformsApiAspectsSource {
             ;
     }
 
-    getLocalizationData(entityName, locale) {
+    /**
+     * Fetches localization aspect data for entity in locale.
+     * @param {string} entityName Name of the entity.
+     * @param {string} locale Identifier of the locale.
+     * @returns {Promise}
+     */
+    fetchLocalizationData(entityName, locale) {
         return fetch(this._buildUrl(this.LOCALIZATION_ENDPOINT + locale + '/' + entityName + '/new')) // TODO: remove the context
             .then(this._toJson)
             .then(this._logResponse("Localization data loaded from API"))
             ;
     }
 
-    getLayout(layoutName) {
+    /**
+     * Fetches layout definition.
+     * @param {string} layoutName Name of the layout.
+     * @returns {Promise}
+     */
+    fetchLayout(layoutName) {
         return fetch(this._buildUrl(this.LAYOUT_ENDPOINT + layoutName))
             .then(this._logResponse("Layout \"" + layoutName + "\" loaded from API"))
             .then(this._toText)
             ;
     }
 
-    getWidget(widgetName) {
+    /**
+     * Fetches widget definition.
+     * @param {string} widgetName Name of the widget.
+     * @returns {string}
+     */
+    fetchWidget(widgetName) {
         // TODO: Improvement: make this asynchronous
         var request = new XMLHttpRequest();
         request.open('GET', this._buildUrl(this.WIDGET_ENDPOINT + widgetName), false);  // `false` makes the request synchronous
@@ -83,6 +111,10 @@ export default class NutformsApiAspectsSource {
         return request.responseText;
     }
 
+    /**
+     * Fetches widget mapping function.
+     * @returns {string}
+     */
     fetchWidgetMapping() {
         // TODO: Improvement: make this asynchronous
         var request = new XMLHttpRequest();

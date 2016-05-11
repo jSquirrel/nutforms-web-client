@@ -2,6 +2,18 @@ import Observable from './Observable.js'
 
 export default class Model extends Observable {
 
+    /**
+     * Represents a Model and holds all its components and contextual parameters.
+     * @param {string} entityName               Name of the represented entity-
+     * @param {object} attributes               Map of Model's Attributes.
+     * @param {object} relations                Map of Model's Relations.
+     * @param {ModelLocalization} localization  Localization of the Model.
+     * @param {ModelRenderer} renderer          Renderer of the Model.
+     * @param {Layout} layout                   Layout of the Model.
+     * @param {object} aspectsSource            AspectsResource instance.
+     * @param {function} widgetMapping          Widget mapping function.
+     * @param {string} context                  Business operation identifier.
+     */
     constructor(entityName, attributes, relations, localization, renderer, layout, aspectsSource, widgetMapping, context) {
         super();
         this.entityName = entityName;
