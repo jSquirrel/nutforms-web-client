@@ -22,6 +22,8 @@ describe('ModelBuilder', () => {
             let renderer = new ModelRenderer();
             let layout = new Layout("layout string");
             let aspectsSource = {"name": "NutformsApiAspectsSource"};
+            let widgetMapping = "widget mapping function";
+            let context = "business operation name";
 
             modelBuilder.getAttributeBuilder("attr1").setName("attr1");
             modelBuilder.getAttributeBuilder("attr2").setName("attr2");
@@ -32,12 +34,16 @@ describe('ModelBuilder', () => {
                 .addRenderer(renderer)
                 .addLayout(layout)
                 .addAspectsSource(aspectsSource)
+                .setWidgetMapping(widgetMapping)
+                .setContext(context)
                 .build();
 
             model.localization.should.equal(localization);
             model.renderer.should.equal(renderer);
             model.layout.should.equal(layout);
             model.aspectsSource.should.equal(aspectsSource);
+            model.widgetMapping.should.equal(widgetMapping);
+            model.context.should.equal(context);
             expect(model.attributes).to.have.property('attr1');
             expect(model.attributes).to.have.property('attr2');
             expect(model.relations).to.have.property('rel1');

@@ -50,8 +50,10 @@ describe('Model', () => {
                 }
             };
             let aspectsSource = {"name": "NutformsApiAspectsSource"};
+            let widgetMapping = "widget mapping function";
+            let context = "business operation name";
 
-            let model = new Model(attributes, relations, localization, renderer, layout, aspectsSource);
+            let model = new Model(attributes, relations, localization, renderer, layout, aspectsSource, widgetMapping, context);
 
             model.attributes.should.equal(attributes);
             model.relations.should.equal(relations);
@@ -61,6 +63,8 @@ describe('Model', () => {
             renderer.model.should.equal(model);
             model.layout.should.equal(layout);
             model.aspectsSource.should.equal(aspectsSource);
+            model.widgetMapping.should.equal(widgetMapping);
+            model.context.should.equal(context);
 
             attributes[0]._bindCalled.should.equal(true);
             attributes[1]._bindCalled.should.equal(true);

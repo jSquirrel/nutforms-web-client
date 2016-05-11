@@ -2,7 +2,7 @@ import Observable from './Observable.js'
 
 export default class Model extends Observable {
 
-    constructor(attributes, relations, localization, renderer, layout, aspectsSource) {
+    constructor(attributes, relations, localization, renderer, layout, aspectsSource, widgetMapping, context) {
         super();
         this.attributes = attributes;
         this.relations = relations;
@@ -10,6 +10,8 @@ export default class Model extends Observable {
         this.renderer = renderer ? renderer.bind(this) : renderer;
         this.layout = layout ? layout.bind(this) : layout;
         this.aspectsSource = aspectsSource;
+        this.widgetMapping = widgetMapping;
+        this.context = context;
 
         Object.keys(attributes).forEach((key) => {
             this.attributes[key].bind(this);

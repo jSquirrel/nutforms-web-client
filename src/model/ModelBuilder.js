@@ -11,9 +11,9 @@ export default class ModelBuilder {
         this.renderer = null;
         this.layout = null;
         this.aspectsSource = null;
+        this.widgetMapping = null;
+        this.context = null;
     }
-
-
 
     getAttributeBuilder(name) {
         if (!this.attributeBuilders.hasOwnProperty(name)) {
@@ -57,6 +57,16 @@ export default class ModelBuilder {
         return this;
     }
 
+    setWidgetMapping(widgetMapping) {
+        this.widgetMapping = widgetMapping;
+        return this;
+    }
+
+    setContext(context) {
+        this.context = context;
+        return this;
+    }
+
     build() {
         return new Model(
             this.buildAttributes(),
@@ -64,7 +74,9 @@ export default class ModelBuilder {
             this.localization,
             this.renderer,
             this.layout,
-            this.aspectsSource
+            this.aspectsSource,
+            this.widgetMapping,
+            this.context
         );
     }
 

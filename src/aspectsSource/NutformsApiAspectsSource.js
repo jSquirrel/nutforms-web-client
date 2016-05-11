@@ -76,7 +76,19 @@ export default class NutformsApiAspectsSource {
     }
 
     getWidget(widgetName) {
+        // TODO: Improvement: make this asynchronous
+        var request = new XMLHttpRequest();
+        request.open('GET', this._buildUrl(this.WIDGET_ENDPOINT + name), false);  // `false` makes the request synchronous
+        request.send(null);
+        return request.responseText;
+    }
 
+    fetchWidgetMapping() {
+        // TODO: Improvement: make this asynchronous
+        var request = new XMLHttpRequest();
+        request.open('GET', this._buildUrl(this.WIDGET_MAPPING_ENDPOINT), false);  // `false` makes the request synchronous
+        request.send(null);
+        return request.responseText;
     }
 
     /**
