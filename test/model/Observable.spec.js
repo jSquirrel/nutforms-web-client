@@ -39,7 +39,6 @@ describe('model.Observable', function () {
             let observer = {};
             observable.listen("change", observer);
             observable.unsubscribe("change", observer);
-            console.log(observable._observers["change"]);
             assert.equal(0, observable._observers["change"].length);
         });
     });
