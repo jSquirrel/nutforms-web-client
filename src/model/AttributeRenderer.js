@@ -15,7 +15,7 @@ export default class AttributeRenderer {
 
     render(htmlElement) {
         htmlElement.innerHTML = this.attribute.model.widgetMapping(
-            null,
+            this.attribute.model.entityName,
             this.attribute.model.context,
             this.attribute.name,
             this.attribute.type,
