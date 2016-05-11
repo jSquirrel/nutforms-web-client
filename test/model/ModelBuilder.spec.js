@@ -8,6 +8,7 @@ chai.should();
 import ModelBuilder from '../../src/model/ModelBuilder.js';
 import ModelLocalization from '../../src/model/ModelLocalization.js';
 import ModelRenderer from '../../src/model/ModelRenderer.js';
+import Layout from '../../src/model/Layout.js'
 import AttributeBuilder from '../../src/model/AttributeBuilder.js';
 import RelationBuilder from '../../src/model/RelationBuilder.js';
 
@@ -19,6 +20,7 @@ describe('ModelBuilder', () => {
 
             let localization = new ModelLocalization("label", "placeholder");
             let renderer = new ModelRenderer();
+            let layout = new Layout("layout string");
 
             modelBuilder.getAttributeBuilder("attr1").setName("attr1");
             modelBuilder.getAttributeBuilder("attr2").setName("attr2");
@@ -27,10 +29,12 @@ describe('ModelBuilder', () => {
             let model = modelBuilder
                 .addLocalization(localization)
                 .addRenderer(renderer)
+                .addLayout(layout)
                 .build();
 
             model.localization.should.equal(localization);
             model.renderer.should.equal(renderer);
+            model.layout.should.equal(layout);
             expect(model.attributes).to.have.property('attr1');
             expect(model.attributes).to.have.property('attr2');
             expect(model.relations).to.have.property('rel1');

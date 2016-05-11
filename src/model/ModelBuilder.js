@@ -5,12 +5,11 @@ import RelationBuilder from './RelationBuilder.js'
 export default class ModelBuilder {
 
     constructor() {
-        // this.attributes = [];
-        // this.relations = [];
         this.attributeBuilders = {};
         this.relationBuilders = {};
         this.localization = null;
         this.renderer = null;
+        this.layout = null;
     }
 
 
@@ -37,17 +36,6 @@ export default class ModelBuilder {
         return this.relationBuilders.hasOwnProperty(name);
     }
 
-
-    // addAttribute(attribute) {
-    //     this.attributes.push(attribute);
-    //     return this;
-    // }
-    //
-    // addRelation(relation) {
-    //     this.relations.push(relation);
-    //     return this;
-    // }
-
     addLocalization(localization) {
         this.localization = localization;
         return this;
@@ -58,12 +46,18 @@ export default class ModelBuilder {
         return this;
     }
 
+    addLayout(layout) {
+        this.layout = layout;
+        return this;
+    }
+
     build() {
         return new Model(
             this.buildAttributes(),
             this.buildRelations(),
             this.localization,
-            this.renderer
+            this.renderer,
+            this.layout
         );
     }
 
