@@ -20,6 +20,10 @@ describe('ModelBuilder', () => {
             let localization = new ModelLocalization("label", "placeholder");
             let renderer = new ModelRenderer();
 
+            modelBuilder.getAttributeBuilder("attr1").setName("attr1");
+            modelBuilder.getAttributeBuilder("attr2").setName("attr2");
+            modelBuilder.getRelationBuilder("rel1").setName("rel1");
+
             let model = modelBuilder
                 .addLocalization(localization)
                 .addRenderer(renderer)
@@ -27,6 +31,9 @@ describe('ModelBuilder', () => {
 
             model.localization.should.equal(localization);
             model.renderer.should.equal(renderer);
+            expect(model.attributes).to.have.property('attr1');
+            expect(model.attributes).to.have.property('attr2');
+            expect(model.relations).to.have.property('rel1');
         });
     });
 
@@ -105,6 +112,8 @@ describe('ModelBuilder', () => {
         it('returns new RelationBuilder if it doesnt have one', () => {
             let name = "name";
             expect(modelBuilder.getRelationBuilder(name)).to.be.an.instanceof(RelationBuilder);
+            expect(modelBuilder.relationBuilders).to.have.property(name);
+            expect(modelBuilder.relationBuilders[name]).to.be.an.instanceof(RelationBuilder);
         });
     });
 });

@@ -26,15 +26,24 @@ describe('ValuesParser', () => {
             modelBuilder.getAttributeBuilder("log");
             modelBuilder.getRelationBuilder("project");
 
+            // parser.parse(
+            //     '{' +
+            //     '"id": 1,' +
+            //     '"description": "lorem",' +
+            //     '"log": "ipsum",' +
+            //     '"project": 1' +
+            //     '}',
+            //     modelBuilder
+            // );
             parser.parse(
-                '{' +
-                '"id": 1,' +
-                '"description": "lorem",' +
-                '"log": "ipsum",' +
-                '"project": 1' +
-                '}',
+                {
+                    id: 1,
+                    description: "lorem",
+                    log: "ipsum",
+                    project: 1
+                },
                 modelBuilder
-            );
+            )
 
             let attributeBuilders = modelBuilder.attributeBuilders;
 

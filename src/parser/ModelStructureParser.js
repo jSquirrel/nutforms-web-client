@@ -11,7 +11,12 @@ export default class ModelStructureParser {
      * @param {ModelBuilder} modelBuilder
      */
     parse(rawMetadata, modelBuilder) {
-        let metadata = JSON.parse(rawMetadata);
+        // try {
+        //     let metadata = JSON.parse(rawMetadata);
+        // } catch (e) {
+        //     console.error(e);
+        // }
+        let metadata = rawMetadata;
 
         if (metadata.hasOwnProperty("attributes")) {
             metadata.attributes.forEach((attribute) => {

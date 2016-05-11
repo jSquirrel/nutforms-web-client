@@ -8,7 +8,8 @@ export default class LocalizationParser {
      * @param {ModelBuilder} modelBuilder
      */
     parse(rawLocalizationData, modelBuilder) {
-        let localizationData = JSON.parse(rawLocalizationData);
+        // let localizationData = JSON.parse(rawLocalizationData);
+        let localizationData = rawLocalizationData;
 
         modelBuilder.addLocalization(new ModelLocalization(
             localizationData["form.label"],

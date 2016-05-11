@@ -19,6 +19,7 @@ export default class ModelBuilder {
         if (!this.attributeBuilders.hasOwnProperty(name)) {
             this.attributeBuilders[name] = new AttributeBuilder();
         }
+        console.log("attrbldrs before", this.attributeBuilders)
         return this.attributeBuilders[name];
     }
 
@@ -73,8 +74,10 @@ export default class ModelBuilder {
      */
     buildAttributes() {
         let attributes = [];
-        this.relationBuilders.forEach((attributeBuilder) => {
-            attributes.push(attributeBuilder.build());
+        console.log("attrbldrs", this.attributeBuilders)
+        Object.keys(this.attributeBuilders).forEach((key) => {
+            let attributeBuilder = this.attributeBuilders[key];
+            attributes[key] = attributeBuilder.build();
         });
         return attributes;
     }
@@ -85,8 +88,9 @@ export default class ModelBuilder {
      */
     buildRelations() {
         let relations = [];
-        this.relationBuilders.forEach((attributeBuilder) => {
-            relations.push(attributeBuilder.build());
+        Object.keys(this.relationBuilders).forEach((key) => {
+            let relationBuilder = this.relationBuilders[key];
+            relations[key] = relationBuilder.build();
         });
         return relations;
     }

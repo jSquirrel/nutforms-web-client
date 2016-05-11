@@ -26,15 +26,27 @@ describe('ValuesParser', () => {
             modelBuilder.getAttributeBuilder("log");
             modelBuilder.getRelationBuilder("project");
 
+            // parser.parse(
+            //     '{' +
+            //     '"form.label": "form label",' +
+            //     '"form.submit.value": "form submit label",' +
+            //     '"form.id.label": "id",' +
+            //     '"form.description.label": "description",' +
+            //     '"form.log.label": "log",' +
+            //     '"form.project.label": "project"' +
+            //     '}',
+            //     modelBuilder
+            // );
+
             parser.parse(
-                '{' +
-                '"form.label": "form label",' +
-                '"form.submit.value": "form submit label",' +
-                '"form.id.label": "id",' +
-                '"form.description.label": "description",' +
-                '"form.log.label": "log",' +
-                '"form.project.label": "project"' +
-                '}',
+                {
+                    "form.label": "form label",
+                    "form.submit.value": "form submit label",
+                    "form.id.label": "id",
+                    "form.description.label": "description",
+                    "form.log.label": "log",
+                    "form.project.label": "project"
+                },
                 modelBuilder
             );
 
