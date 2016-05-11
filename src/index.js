@@ -27,12 +27,7 @@ export default class Nutforms {
             this.aspectsSource.getLayout(layout)
             // TODO: layout, widgets?
         ]).then((values) => {
-            let model = this.buildModel(
-                values.shift(),
-                values.shift(),
-                values.shift(),
-                values.shift()
-            );
+            let model = this.buildModel(...values);
             model.renderer.render(htmlElement);
         });
     }
