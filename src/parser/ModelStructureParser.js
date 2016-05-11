@@ -1,9 +1,7 @@
 import AttributeBuilder from './../model/AttributeBuilder.js'
 import RelationBuilder from './../model/RelationBuilder.js'
 
-/**
- * Parses model structure metadata from JSON and calls appropriate methods on given builder.
- */
+
 export default class ModelStructureParser {
 
     /**
