@@ -47,10 +47,15 @@ export default class ModelRenderer {
                 forms[i].appendChild(element);
             }
         }
-        // TODO: add attributes
-        // TODO: submit
 
-        htmlElement.innerHTML = new XMLSerializer().serializeToString(layoutDOM);
+        // Add form submit
+        // TODO: load users definition?
+        let submit =
+            "<div class=\"form-group\"><input type=\"submit\" class=\"btn btn-default\" nf-submit=\"submit\" value=\""
+            + this.model.localization.submitLabel
+            + "\" /></div>";
+
+        htmlElement.innerHTML = new XMLSerializer().serializeToString(layoutDOM) + submit;
     }
 
 }
