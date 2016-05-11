@@ -5,6 +5,7 @@ import RelationBuilder from './RelationBuilder.js'
 export default class ModelBuilder {
 
     constructor() {
+        this.entityName = null;
         this.attributeBuilders = {};
         this.relationBuilders = {};
         this.localization = null;
@@ -13,6 +14,11 @@ export default class ModelBuilder {
         this.aspectsSource = null;
         this.widgetMapping = null;
         this.context = null;
+    }
+
+    setEntityName(entityName) {
+        this.entityName = entityName;
+        return this;
     }
 
     getAttributeBuilder(name) {
@@ -69,6 +75,7 @@ export default class ModelBuilder {
 
     build() {
         return new Model(
+            this.entityName,
             this.buildAttributes(),
             this.buildRelations(),
             this.localization,

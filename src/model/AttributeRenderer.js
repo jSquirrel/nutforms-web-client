@@ -14,7 +14,13 @@ export default class AttributeRenderer {
     }
 
     render(htmlElement) {
-        htmlElement.innerHTML = "input"; // TODO: add widget
+        htmlElement.innerHTML = this.attribute.model.widgetMapping(
+            null,
+            this.attribute.model.context,
+            this.attribute.name,
+            this.attribute.type,
+            this.attribute.primary
+        ); // TODO: add widget
     }
 
 }

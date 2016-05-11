@@ -37,32 +37,43 @@ export default class Nutforms {
             this.aspectsSource.getValues(entityName, entityId),
             this.aspectsSource.getLayout(layout)
         ]).then((values) => {
-            let model = this.buildModel(...values, widgetMapping, context);
+            let model = this.buildModel(...values, entityName, widgetMapping, context);
             model.renderer.render(htmlElement);
         });
     }
 
-    buildModel(structureMetadata, localizationData, values, layout, widgetMapping, context) {
-
-        console.log(structureMetadata, localizationData, values);
-
+    /**
+     * Builds the Rich Model from context parameters and aspects definitions.
+     *
+     * @param {*} structureMetadata
+     * @param {*} localizationData
+     * @param {*} values
+     * @param {string} layout
+     * @param {string} entityName
+     * @param {function} widgetMapping
+     * @param {string} context
+     * @returns {Model}
+     */
+    buildModel(structureMetadata, localizationData, values, layout, entityName, widgetMapping, context) {
+        // Preps the parsers
         let structureParser = new ModelStructureParser();
         let valuesParser = new ValuesParser();
         let localizationParser = new LocalizationParser();
 
-        let builder = new ModelBuilder();
-
-        structureParser.parse(structureMetadata, builder);
-        valuesParser.parse(values, builder);
-        localizationParser.parse(localizationData, builder);
-
-        builder
+        // Creates builder and sets context parameters
+        let builder = new ModelBuilder()
+            .setEntityName(entityName)
             .addRenderer(new ModelRenderer())
             .addLayout(new Layout(layout))
             .addAspectsSource(this.aspectsSource)
             .setWidgetMapping(widgetMapping)
             .setContext(context)
-        ;
+            ;
+
+        // Calls the aspect DSLs parsers, who call appropriate functions on ModelBuilder
+        structureParser.parse(structureMetadata, builder);
+        valuesParser.parse(values, builder);
+        localizationParser.parse(localizationData, builder);
 
         return builder.build();
     }

@@ -18,6 +18,7 @@ describe('ModelBuilder', () => {
         it('creates Model with given parameters', () => {
             let modelBuilder = new ModelBuilder();
 
+            let entityName = "entity name";
             let localization = new ModelLocalization("label", "placeholder");
             let renderer = new ModelRenderer();
             let layout = new Layout("layout string");
@@ -30,6 +31,7 @@ describe('ModelBuilder', () => {
             modelBuilder.getRelationBuilder("rel1").setName("rel1");
 
             let model = modelBuilder
+                .setEntityName(entityName)
                 .addLocalization(localization)
                 .addRenderer(renderer)
                 .addLayout(layout)
@@ -38,6 +40,7 @@ describe('ModelBuilder', () => {
                 .setContext(context)
                 .build();
 
+            model.entityName.should.equal(entityName);
             model.localization.should.equal(localization);
             model.renderer.should.equal(renderer);
             model.layout.should.equal(layout);

@@ -12,6 +12,7 @@ import ModelRenderer from '../../src/model/ModelRenderer.js';
 describe('Model', () => {
     describe('#constructor', () => {
         it('initializes the parameters and binds the components', () => {
+            let entityName = "entity name";
             let attributes = [
                 {
                     name: "attr1",
@@ -53,8 +54,9 @@ describe('Model', () => {
             let widgetMapping = "widget mapping function";
             let context = "business operation name";
 
-            let model = new Model(attributes, relations, localization, renderer, layout, aspectsSource, widgetMapping, context);
+            let model = new Model(entityName, attributes, relations, localization, renderer, layout, aspectsSource, widgetMapping, context);
 
+            model.entityName.should.equal(entityName);
             model.attributes.should.equal(attributes);
             model.relations.should.equal(relations);
             model.localization.should.equal(localization);
