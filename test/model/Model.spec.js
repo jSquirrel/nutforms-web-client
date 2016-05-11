@@ -16,14 +16,14 @@ describe('Model', () => {
                 {
                     name: "attr1",
                     _bindCalled: false,
-                    bind: function(model) {
+                    bind: function (model) {
                         this._bindCalled = true;
                     }
                 },
                 {
                     name: "attr2",
                     _bindCalled: false,
-                    bind: function(model) {
+                    bind: function (model) {
                         this._bindCalled = true;
                     }
                 }
@@ -32,26 +32,41 @@ describe('Model', () => {
                 {
                     name: "rel1",
                     _bindCalled: false,
-                    bind: function(model) {
+                    bind: function (model) {
                         this._bindCalled = true;
                     }
-                }];
-            let primary = false;
+                }
+            ];
+
 
             let localization = new ModelLocalization("form label", "submit label");
             let renderer = new ModelRenderer();
-            let model = new Model(attributes, relations, localization, renderer);
+            let layout = {
+                layoutString: "layout1",
+                _bindCalled: false,
+                bind: function (model) {
+                    this._bindCalled = true;
+                    return this;
+                }
+            };
+            let aspectsSource = {"name": "NutformsApiAspectsSource"};
+
+            let model = new Model(attributes, relations, localization, renderer, layout, aspectsSource);
 
             model.attributes.should.equal(attributes);
             model.relations.should.equal(relations);
             model.localization.should.equal(localization);
-            model.renderer.should.equal(renderer);
             localization.model.should.equal(model);
+            model.renderer.should.equal(renderer);
             renderer.model.should.equal(model);
+            model.layout.should.equal(layout);
+            model.aspectsSource.should.equal(aspectsSource);
 
             attributes[0]._bindCalled.should.equal(true);
             attributes[1]._bindCalled.should.equal(true);
             relations[0]._bindCalled.should.equal(true);
+
+            layout._bindCalled.should.equal(true);
         });
     });
 });

@@ -10,6 +10,7 @@ export default class ModelBuilder {
         this.localization = null;
         this.renderer = null;
         this.layout = null;
+        this.aspectsSource = null;
     }
 
 
@@ -51,13 +52,19 @@ export default class ModelBuilder {
         return this;
     }
 
+    addAspectsSource(aspectsSource) {
+        this.aspectsSource = aspectsSource;
+        return this;
+    }
+
     build() {
         return new Model(
             this.buildAttributes(),
             this.buildRelations(),
             this.localization,
             this.renderer,
-            this.layout
+            this.layout,
+            this.aspectsSource
         );
     }
 

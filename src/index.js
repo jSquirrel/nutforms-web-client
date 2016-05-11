@@ -53,6 +53,7 @@ export default class Nutforms {
 
         builder.addRenderer(new ModelRenderer());
         builder.addLayout(new Layout(layout));
+        builder.addAspectsSource(this.aspectsSource);
 
         return builder.build();
     }

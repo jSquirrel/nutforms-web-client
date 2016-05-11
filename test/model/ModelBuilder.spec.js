@@ -21,6 +21,7 @@ describe('ModelBuilder', () => {
             let localization = new ModelLocalization("label", "placeholder");
             let renderer = new ModelRenderer();
             let layout = new Layout("layout string");
+            let aspectsSource = {"name": "NutformsApiAspectsSource"};
 
             modelBuilder.getAttributeBuilder("attr1").setName("attr1");
             modelBuilder.getAttributeBuilder("attr2").setName("attr2");
@@ -30,11 +31,13 @@ describe('ModelBuilder', () => {
                 .addLocalization(localization)
                 .addRenderer(renderer)
                 .addLayout(layout)
+                .addAspectsSource(aspectsSource)
                 .build();
 
             model.localization.should.equal(localization);
             model.renderer.should.equal(renderer);
             model.layout.should.equal(layout);
+            model.aspectsSource.should.equal(aspectsSource);
             expect(model.attributes).to.have.property('attr1');
             expect(model.attributes).to.have.property('attr2');
             expect(model.relations).to.have.property('rel1');
