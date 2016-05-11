@@ -1,6 +1,7 @@
 import NutformsApiAspectsSource from './aspectsSource/NutformsApiAspectsSource.js';
 
 import ModelBuilder from './model/ModelBuilder.js'
+import ModelRenderer from './model/ModelRenderer.js'
 
 
 import ModelStructureParser from './parser/ModelStructureParser.js'
@@ -17,7 +18,7 @@ export default class Nutforms {
         this.aspectsSource = source;
     }
 
-    generateForm(entityName, locale, entityId, layout, widgetMapping) {
+    generateForm(htmlElement, entityName, locale, entityId, layout, widgetMapping) {
         Promise.all([
             this.aspectsSource.getStructureMetadata(entityName),
             this.aspectsSource.getLocalizationData(entityName, locale),
@@ -29,8 +30,9 @@ export default class Nutforms {
                 values.shift(),
                 values.shift()
             );
-            console.log("Model", model)
-            document.write("It works!");
+            model.renderer = new ModelRenderer();
+            model.renderer.bind(model);
+            model.renderer.render(htmlElement);
         });
     }
 
