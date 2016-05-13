@@ -82,6 +82,9 @@ Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
 ```
 
 You can even disable some fields base on security preconditions (e.g., user roles)
+by listening to MODEL_BUILT action and altering widget mapping function.
+**Note:** This example assumes that you have widgets for both enabled and disabled fields. Alternatively, you can
+listen to `MODEL_RENDERED` event and manually disable all the unwanted fields.
 
 ```javascript
 Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
@@ -96,25 +99,12 @@ Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
         delete model.attributes["log"];
     }
 }
-```
-
-The extended widget mapping could then look something like this:
-```javascript
 var mappingFunction = function (attribute) {
     var widgetNamespace = "default";
     if (attribute.readOnly) {
         widgetNamespace = "disabled";
     }
-
-    var widgetName = "";
-    switch (attribute.type) {
-        case "java.lang.String":
-            widgetName = "text-input";
-            break;
-        case "java.lang.Long":
-            widgetName = "number-input";
-            break;
-    }
+    // ...
     return widgetNamespace + "/" + widgetName;
 };
 ```
