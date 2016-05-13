@@ -81,7 +81,7 @@ Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
 });
 ```
 
-You can even disable some fields base on security preconditions (e.g., user roles)
+You can even disable some fields based on security preconditions (e.g., user roles)
 by listening to MODEL_BUILT action and altering widget mapping function.
 **Note:** This example assumes that you have widgets for both enabled and disabled fields. Alternatively, you can
 listen to `MODEL_RENDERED` event and manually disable all the unwanted fields.
