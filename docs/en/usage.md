@@ -79,6 +79,7 @@ Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
     // Extend rich model
     model.validation = new YourValidatorClass();
 });
+```
 
 You can even disable some fields base on security preconditions (e.g., user roles)
 
