@@ -1,4 +1,4 @@
-import Observable from './Observable.js'
+import Observable from './../observer/Observable.js'
 
 export default class Attribute extends Observable {
 

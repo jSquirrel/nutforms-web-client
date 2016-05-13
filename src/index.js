@@ -2,7 +2,7 @@ import NutformsApiAspectsSource from './aspectsSource/NutformsApiAspectsSource.j
 import ModelBuilder from './model/ModelBuilder.js'
 import ModelRenderer from './model/ModelRenderer.js'
 import Layout from './model/Layout.js'
-import Observable from './model/Observable.js'
+import Observable from './observer/Observable.js'
 import ModelStructureParser from './parser/ModelStructureParser.js'
 import ValuesParser from './parser/ValuesParser.js'
 import LocalizationParser from './parser/LocalizationParser.js'
