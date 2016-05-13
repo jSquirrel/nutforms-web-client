@@ -78,7 +78,12 @@ Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
     
     // Extend rich model
     model.validation = new YourValidatorClass();
-    
+});
+
+You can even disable some fields base on security preconditions (e.g., user roles)
+
+```javascript
+Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
     // Disable some of the fields based on security rules
     if (!canEditLog) {
         model.attributes["log"].readOnly = true;
@@ -89,5 +94,26 @@ Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
     if (!canViewLog) {
         delete model.attributes["log"];
     }
-});
+}
+```
+
+The extended widget mapping could then look something like this:
+```javascript
+var mappingFunction = function (attribute) {
+    var widgetNamespace = "default";
+    if (attribute.readOnly) {
+        widgetNamespace = "disabled";
+    }
+
+    var widgetName = "";
+    switch (attribute.type) {
+        case "java.lang.String":
+            widgetName = "text-input";
+            break;
+        case "java.lang.Long":
+            widgetName = "number-input";
+            break;
+    }
+    return widgetNamespace + "/" + widgetName;
+};
 ```
