@@ -1,4 +1,5 @@
 import AttributeIterator from './AttributeIterator.js'
+import DOMHelper from './../helper/DOMHelper.js'
 
 export default class ModelRenderer {
 
@@ -42,7 +43,7 @@ export default class ModelRenderer {
         });
 
         // Add implicit
-        while(attributeIterator.hasNext()) {
+        while (attributeIterator.hasNext()) {
             let attribute = attributeIterator.getNext();
             let element = document.createElement("div");
             attribute.renderer.render(element);
@@ -59,31 +60,35 @@ export default class ModelRenderer {
             + this.model.localization.submitLabel
             + "\" /></div>";
 
-        // TODO: bind listeners
-
         htmlElement.innerHTML = new XMLSerializer().serializeToString(layoutDOM) + submit;
+        this.bindListeners(htmlElement);
     }
 
-}
-
-class DOMHelper {
-
     /**
-     * Finds all elements in the document which have attribute with given name.
-     *
-     * @param {Element|HTMLDocument} doc
-     * @param {string} attribute
-     * @returns {Array}
+     * Binds listeners to the generated form.
+     * @param {HTMLElement} htmlElement The HTML element containing the form.
      */
-    static findElementsWithAttribute(doc, attribute) {
-        let matchingElements = [];
-        let allElements = doc.getElementsByTagName('*');
-        for (var i = 0, n = allElements.length; i < n; i++) {
-            if (allElements[i].getAttribute(attribute) !== null) {
-                matchingElements.push(allElements[i]);
-            }
+    bindListeners(htmlElement) {
+        let values = DOMHelper.findElementsWithAttribute(htmlElement, "nf-field-widget-value");
+        for (var k = 0, o = values.length; k < o; k++) {
+            let value = values[k];
+            let attributeName = value.getAttribute("nf-field-widget-value");
+            let attribute = this.model.attributes[attributeName];
+
+            // Adding event listeners to attributes
+            value.addEventListener("keyup", () => {
+                console.log("keyup", value);
+                attribute.setValue(value.value);
+            }, false);
+            value.addEventListener("change", () => {
+                console.log("change", value);
+                attribute.setValue(value.value);
+            }, false);
+            value.addEventListener("blur", () => {
+                console.log("blur", value);
+                attribute.setValue(value.value);
+            }, false);
         }
-        return matchingElements;
     }
 
 }

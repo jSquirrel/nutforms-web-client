@@ -1,5 +1,5 @@
 import assert from 'assert';
-import Observable from './../../src/model/Observable.js';
+import Observable from './../../src/observer/Observable.js';
 
 class ObserverMock {
     constructor() {

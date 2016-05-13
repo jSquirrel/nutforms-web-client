@@ -1,4 +1,6 @@
 import Observable from './../observer/Observable.js'
+import * as AttributeActions from './../actions/AttributeActions.js';
+
 
 export default class Attribute extends Observable {
 
@@ -30,6 +32,15 @@ export default class Attribute extends Observable {
     bind(model) {
         this.model = model;
         return this;
+    }
+
+    /**
+     * Sets value to given value and triggers FIELD_CHANGED event.
+     * @param {*} value The value.
+     */
+    setValue(value) {
+        this.value = value;
+        this.trigger(AttributeActions.VALUE_CHANGED, this);
     }
 
 }

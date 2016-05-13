@@ -27,22 +27,40 @@ export default class AttributeRenderer {
      * @param {HTMLElement} htmlElement The HTMLElement to bind the field to.
      */
     render(htmlElement) {
-        let widgetName = this.attribute.model.widgetMapping(
+        htmlElement.innerHTML =
+            this.injectWidgetValues(
+                this.attribute.model.aspectsSource.fetchWidget(
+                    this.getWidgetName()
+                )
+            );
+    }
+
+    /**
+     * Determines widget name.
+     * @returns {string}
+     * @private
+     */
+    getWidgetName() {
+        return this.attribute.model.widgetMapping(
             this.attribute.model.entityName,
             this.attribute.model.context,
             this.attribute.name,
             this.attribute.type,
             this.attribute.primary
         );
+    }
 
-        let widgetString = this.attribute.model.aspectsSource.fetchWidget(widgetName);
+    /**
+     * Injects attribute values by replacing the widget meta instructions.
+     * @param {string} widgetString The widget DSL.
+     * @returns {string}
+     * @private
+     */
+    injectWidgetValues(widgetString) {
         widgetString = widgetString.replace(new RegExp('{attribute.name}', 'g'), this.attribute.name);
         widgetString = widgetString.replace(new RegExp('{attribute.formLabel}', 'g'), this.attribute.localization.label);
         widgetString = widgetString.replace(new RegExp('{attribute.value}', 'g'), this.attribute.value);
-
-        // TODO: bind listeners
-
-        htmlElement.innerHTML = widgetString;
+        return widgetString;
     }
 
 }
