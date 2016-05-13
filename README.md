@@ -20,3 +20,8 @@ To run tests, simply execute them via `npm`.
 ```
 $ npm test
 ```
+
+## Documentation
+
+For closer look at the architecture and usage of this library, please refer
+to [documentation](https://github.com/jSquirrel/nutforms-web-client/tree/master/docs/en/index.md).
