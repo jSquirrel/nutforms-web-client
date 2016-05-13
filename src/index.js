@@ -1,20 +1,26 @@
 import NutformsApiAspectsSource from './aspectsSource/NutformsApiAspectsSource.js';
-
 import ModelBuilder from './model/ModelBuilder.js'
 import ModelRenderer from './model/ModelRenderer.js'
 import Layout from './model/Layout.js'
-
-
+import Observable from './model/Observable.js'
 import ModelStructureParser from './parser/ModelStructureParser.js'
 import ValuesParser from './parser/ValuesParser.js'
 import LocalizationParser from './parser/LocalizationParser.js'
 
-export default class Nutforms {
+export default class Nutforms extends Observable {
 
+    /**
+     * Facade for Nutforms form generation subsystem.
+     */
     constructor() {
+        super();
         this.aspectsSource = null;
     }
 
+    /**
+     * Sets AspectsSource implementation to the library.
+     * @param source
+     */
     setAspectsSource(source) {
         this.aspectsSource = source;
     }
@@ -37,8 +43,11 @@ export default class Nutforms {
             this.aspectsSource.fetchValues(entityName, entityId),
             this.aspectsSource.fetchLayout(layout)
         ]).then((values) => {
+            this.trigger("aspects-fetched", values);
             let model = this.buildModel(...values, entityName, widgetMapping, context);
+            this.trigger("model-built", model);
             model.renderer.render(htmlElement);
+            this.trigger("model-rendered", model);
         });
     }
 

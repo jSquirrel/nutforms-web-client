@@ -29,6 +29,11 @@
     var mappingFunction;
     eval(mappingFunctionString);
 
+    // Listen to nutforms events
+    Nutforms.listen("model-built", function (model) {
+        console.log("Model built!", model);
+    });
+
     // Generate the form
     Nutforms.generateForm(
             document.getElementById("form"),                // HTML Element
