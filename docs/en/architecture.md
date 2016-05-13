@@ -1,5 +1,17 @@
 # Nutforms Web Client Architecture
 
+## Nutforms facade
+
+The whole form generation subsystem is covered by facade provided
+by [Nutforms](https://github.com/jSquirrel/nutforms-web-client/blob/master/src/model/Nutforms.js) class.
+
+It provides `generateForm()` function, which generates the form and the rich model behind the form
+from given context parameters and binds the form to the given HTML element.
+The method is made up of these steps
+1) First, it fetches the aspects definitions
+2) Second, it builds the rich model
+3) Third, it renders the form and appends it to the HTML element
+
 ## Rich Model
 
 Before the form is generated, Rich Model is built. This model is mirroring the model on the server
