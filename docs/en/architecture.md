@@ -11,7 +11,7 @@ The method is made up of these steps:
 
 1. First, it fetches the aspects definitions
 2. Second, it builds the rich model
-3. Third, it renders the form and appends it to the HTML element
+3. Third, it renders the form, appends it to the HTML element and registers event callbacks
 
 ## Rich Model
 
