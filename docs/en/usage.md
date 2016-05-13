@@ -29,10 +29,10 @@ Nutforms library can then be used like this:
     );
 
     // Define your widget mapping function
-    var mappingFunction = function (className, context, attributeName, attributeType, isAttributePrimary) {
+    var mappingFunction = function (attribute) {
         var widgetNamespace = "default";
         var widgetName = "";
-        switch (attributeType) {
+        switch (attribute.type) {
             case "java.lang.String":
                 widgetName = "text-input";
                 break;
@@ -78,5 +78,16 @@ Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
     
     // Extend rich model
     model.validation = new YourValidatorClass();
+    
+    // Disable some of the fields based on security rules
+    if (!canEditLog) {
+        model.attributes["log"].readOnly = true;
+        // Then, you can check for disabled value in widget mapping function and force read-only widgets for such fields
+    }
+    
+    // Or even remove attribute based on security rules if you need to
+    if (!canViewLog) {
+        delete model.attributes["log"];
+    }
 });
 ```
