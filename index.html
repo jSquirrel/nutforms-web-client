@@ -30,12 +30,12 @@
     eval(mappingFunctionString);
 
     // Listen to nutforms events
-    Nutforms.listen("model-built", function (model) {
+    Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
         console.log("Model built!", model);
     });
 
     // Generate the form
-    Nutforms.generateForm(
+    nutforms = Nutforms.generateForm(
             document.getElementById("form"),                // HTML Element
             "cz.cvut.fel.nutforms.example.model.Bug",       // Entity name
             "cz_CS",                                        // Locale

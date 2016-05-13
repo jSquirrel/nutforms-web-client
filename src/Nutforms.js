@@ -5,6 +5,7 @@ import Observable from './observer/Observable.js'
 import ModelStructureParser from './parser/ModelStructureParser.js'
 import ValuesParser from './parser/ValuesParser.js'
 import LocalizationParser from './parser/LocalizationParser.js'
+import * as NutformsActions from './actions/NutformsActions.js'
 
 export default class Nutforms extends Observable {
 
@@ -42,11 +43,11 @@ export default class Nutforms extends Observable {
             this.aspectsSource.fetchValues(entityName, entityId),
             this.aspectsSource.fetchLayout(layout)
         ]).then((values) => {
-            this.trigger("aspects-fetched", values);
+            this.trigger(NutformsActions.ASPECTS_FETCHED, values);
             let model = this.buildModel(...values, entityName, widgetMapping, context);
-            this.trigger("model-built", model);
+            this.trigger(NutformsActions.MODEL_BUILT, model);
             model.renderer.render(htmlElement);
-            this.trigger("model-rendered", model);
+            this.trigger(NutformsActions.MODEL_RENDERED, model);
             console.log("Nutforms: form generated successfully!");
         });
     }
