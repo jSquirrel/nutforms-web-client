@@ -89,6 +89,9 @@ export default class ModelRenderer {
                 console.log("blur", value);
                 attribute.setValue(value.value);
             }, false);
+
+            // Set unique id
+            value.setAttribute("id", this.model.entityName + "[" + attributeName + "]");
         }
 
         let submits = DOMHelper.findElementsWithAttribute(htmlElement, "nf-submit");
