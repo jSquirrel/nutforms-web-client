@@ -47,7 +47,7 @@ export default class Nutforms extends Observable {
             let model = this.buildModel(...values, entityName, widgetMapping, context);
             this.trigger(NutformsActions.MODEL_BUILT, model);
             model.renderer.render(htmlElement);
-            this.trigger(NutformsActions.MODEL_RENDERED, model);
+            this.trigger(NutformsActions.FORM_RENDERED, model);
             console.log("Nutforms: form generated successfully!");
         });
     }
