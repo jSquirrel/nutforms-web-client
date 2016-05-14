@@ -78,15 +78,12 @@ export default class ModelRenderer {
 
             // Adding event listeners to attributes
             value.addEventListener("keyup", () => {
-                console.log("keyup", value);
                 attribute.setValue(value.value);
             }, false);
             value.addEventListener("change", () => {
-                console.log("change", value);
                 attribute.setValue(value.value);
             }, false);
             value.addEventListener("blur", () => {
-                console.log("blur", value);
                 attribute.setValue(value.value);
             }, false);
 

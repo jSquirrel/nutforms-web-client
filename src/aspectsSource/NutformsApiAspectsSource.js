@@ -26,7 +26,7 @@ export default class NutformsApiAspectsSource {
             try {
                 return response.json();
             } catch (err) {
-                console.log("Error while parsing JSON", response);
+                console.error("Error while parsing JSON", response);
                 return null;
             }
         };
