@@ -14,7 +14,7 @@ Then, you can use the following properties in your webpage environment:
 - `Nutforms`: Facade for the form-generation subsystem
 - `NutformsApiAspectsSource`: Default aspects source using Nutforms Server API
 - `NutformsActions`: Actions produced by the `Nutforms` class. Take a look at [source code](https://github.com/jSquirrel/nutforms-web-client/blob/master/src/actions/NutformsActions.js).
-- `ModelActions`: Actions produced by the `Model` class. Take a look at [soruce code](https://github.com/jSquirrel/nutforms-web-client/blob/master/src/actions/ModelActions.js).
+- `ModelActions`: Actions produced by the `Model` class. Take a look at [source code](https://github.com/jSquirrel/nutforms-web-client/blob/master/src/actions/ModelActions.js).
 - `AttributeActions`: Actions produced by the `Attribute` class. Take a look at [source code](https://github.com/jSquirrel/nutforms-web-client/blob/master/src/actions/AttributeActions.js).
 
 Nutforms library can then be used like this:
