@@ -2025,7 +2025,7 @@
 	                        valuesObject[attributeName] = _value.value;
 	                    }
 
-	                    model.submit.submit(values);
+	                    model.submit.submit(valuesObject);
 	                });
 	            }
 	        }

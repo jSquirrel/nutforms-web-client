@@ -1,6 +1,6 @@
 {
   "name": "nutforms-web-client",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Nutforms Client library for web applications",
   "main": "src/index.js",
   "scripts": {
