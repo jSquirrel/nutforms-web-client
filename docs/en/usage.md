@@ -308,6 +308,28 @@ Full example of Nutforms library form generation:
 </script>
 ```
 
+## Listening to events
+
+Here is list of events produced by Nutforms classes and the parameters which they pass to the callback function:
+
+- `Attribute`
+  - `AttributeActions.VALUE_CHANGED`
+    - `attribute` - The `Attribute` instance on which the value was changed
+- `Model`  
+  - `ModelActions.SUBMITTED`
+    - `model` - The `Model` instance
+- `Nutforms`
+  - `NutformsActions.ASPECTS_FETCHED`
+    - `values` - Array of all the aspect values
+  - `NutformsActions.MODEL_BUILT`
+    - `model` - The `Model` instance
+  - `NutformsActions.FORM_RENDERED`
+    - `model` - The `Model` instance
+    - `htmlElement` - The `HTMLElement` instance to which the form is appended
+  - `NutformsActions.FORM_SUBMITTED`
+    - `model` - The `Model` instance
+    - `values` - Object with attribute names as keys and attribute values as their values
+
 ## Extending the library
 
 The form generation can be extended by listening to the values and modifying or extending the Rich Model.
