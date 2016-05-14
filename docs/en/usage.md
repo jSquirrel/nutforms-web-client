@@ -47,6 +47,9 @@ Nutforms library can then be used like this:
     Nutforms.listen(NutformsActions.MODEL_BUILT, function (model) {
         console.log("Model built!", model);
     });
+    Nutforms.listen(NutformsActions.FORM_SUBMITTED, function (model, values) {
+        console.log("Form submitted", model, values);
+    });
 
     // Generate the form
     nutforms = Nutforms.generateForm(

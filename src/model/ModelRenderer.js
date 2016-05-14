@@ -1,5 +1,6 @@
 import AttributeIterator from './AttributeIterator.js'
 import DOMHelper from './../helper/DOMHelper.js'
+import * as ModelActions from './../actions/ModelActions.js'
 
 export default class ModelRenderer {
 
@@ -88,6 +89,25 @@ export default class ModelRenderer {
                 console.log("blur", value);
                 attribute.setValue(value.value);
             }, false);
+        }
+
+        let submits = DOMHelper.findElementsWithAttribute(htmlElement, "nf-submit");
+        let model = this.model;
+        if (submits.length > 0) {
+            let submit = submits.shift(); // TODO: Improvement: what about other submits?
+            submit.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                // Transform values from model into simple object
+                let valuesObject = {};
+                for (var k = 0, o = values.length; k < o; k++) {
+                    let value = values[k];
+                    let attributeName = value.getAttribute("nf-field-widget-value");
+                    valuesObject[attributeName] = value.value;
+                }
+
+                this.model.trigger(ModelActions.SUBMITTED, model, valuesObject);
+            });
         }
     }
 
