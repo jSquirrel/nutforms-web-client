@@ -133,7 +133,7 @@ Nutforms.listen(NutformsActions.FORM_SUBMITTED, function (model, values) {
 
 ### Summary
 
-Nutforms library can then be used like this:
+Full example of Nutforms library form generation:
 
 ```html
 <script type="text/javascript">
