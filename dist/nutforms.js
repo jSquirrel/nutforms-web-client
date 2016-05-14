@@ -891,8 +891,8 @@
 	            Promise.all([this.aspectsSource.fetchStructureMetadata(entityName), this.aspectsSource.fetchLocalizationData(entityName, locale, context), this.aspectsSource.fetchValues(entityName, entityId), this.aspectsSource.fetchLayout(layout)]).then(function (values) {
 	                _this2.trigger(NutformsActions.ASPECTS_FETCHED, values);
 	                var model = _this2.buildModel.apply(_this2, _toConsumableArray(values).concat([entityName, locale, widgetMapping, context]));
-	                model.listen(ModelActions.SUBMITTED, function (model, values) {
-	                    _this2.trigger(NutformsActions.FORM_SUBMITTED, model, values);
+	                model.listen(ModelActions.SUBMITTED, function (model) {
+	                    _this2.trigger(NutformsActions.FORM_SUBMITTED, model);
 	                });
 	                _this2.trigger(NutformsActions.MODEL_BUILT, model);
 	                model.renderer.render(htmlElement);
@@ -2026,8 +2026,6 @@
 	                    }
 
 	                    model.submit.submit(values);
-
-	                    _this2.model.trigger(ModelActions.SUBMITTED, model, valuesObject);
 	                });
 	            }
 	        }
@@ -2328,7 +2326,7 @@
 	                    _this.model.relations[key].setValue(values[key]);
 	                }
 	            });
-	            this.model.trigger(ModelActions.SUBMITTED, this);
+	            this.model.trigger(ModelActions.SUBMITTED, this.model);
 	        }
 	    }]);
 
