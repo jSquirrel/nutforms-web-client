@@ -10,7 +10,7 @@ Automatic aspect-oriented form generation for web applications.
 You can install the library via `npm`.
 
 ```
-$ npm install nutforms-web --save
+$ npm install nutforms-web-client --save
 ```
 
 ## Running tests
