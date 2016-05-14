@@ -32,7 +32,7 @@ export default class Submit {
                 this.model.relations[key].setValue(values[key]);
             }
         });
-        this.model.trigger(ModelActions.SUBMITTED, this);
+        this.model.trigger(ModelActions.SUBMITTED, this.model);
     }
 
 }
