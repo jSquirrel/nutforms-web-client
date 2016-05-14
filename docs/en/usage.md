@@ -219,14 +219,14 @@ You must provide the following parameters:
 
 ```javascript
 // Generate the form
-nutforms = Nutforms.generateForm(
-        document.getElementById("form"),                // HTML Element
-        "cz.cvut.fel.nutforms.example.model.Bug",       // Entity name
-        "cz_CS",                                        // Locale
-        1,                                              // Entity id
-        "cz.cvut.fel.nutforms.example.model.Bug/new",   // Layout name
-        mappingFunction,                                // Mapping function
-        "new"                                           // Business context
+Nutforms.generateForm(
+    document.getElementById("form"),                // HTML Element
+    "cz.cvut.fel.nutforms.example.model.Bug",       // Entity name
+    "cz_CS",                                        // Locale
+    1,                                              // Entity id
+    "cz.cvut.fel.nutforms.example.model.Bug/new",   // Layout name
+    mappingFunction,                                // Mapping function
+    "new"                                           // Business context
 );
 ```
 
@@ -296,7 +296,7 @@ Full example of Nutforms library form generation:
     });
 
     // Generate the form
-    nutforms = Nutforms.generateForm(
+    Nutforms.generateForm(
             document.getElementById("form"),                // HTML Element
             "cz.cvut.fel.nutforms.example.model.Bug",       // Entity name
             "cz_CS",                                        // Locale
