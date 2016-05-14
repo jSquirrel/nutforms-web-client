@@ -3,7 +3,7 @@ import Nutforms from './Nutforms.js'
 import * as NutformsActions from './actions/NutformsActions.js'
 import * as ModelActions from './actions/ModelActions.js'
 import * as AttributeActions from './actions/AttributeActions.js'
-import * as DOMHelper from './helper/DOMHelper.js'
+import DOMHelper from './helper/DOMHelper.js'
 
 window.Nutforms = new Nutforms();
 window.NutformsApiAspectsSource = NutformsApiAspectsSource;
