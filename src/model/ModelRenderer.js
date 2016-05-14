@@ -26,6 +26,8 @@ export default class ModelRenderer {
      */
     render(htmlElement) {
         let parser = new DOMParser();
+        let xmlSerializer = new XMLSerializer();
+
         let layoutDOM = parser.parseFromString(this.model.layout.layoutString, "text/html");
         let attributeIterator = new AttributeIterator(this.model);
 
@@ -34,16 +36,47 @@ export default class ModelRenderer {
             formLabel.innerHTML = this.model.localization.formLabel;
         });
 
+        // Check for iterators
+        DOMHelper.findElementsWithAttribute(layoutDOM, "nf-field-iterator").forEach((iterator) => {
+            let template = iterator.innerHTML;
+            let iteratorHTML = "";
+            while (attributeIterator.hasNext()) {
+                let templateDOM = parser.parseFromString(template, "text/html");
+                // Add explicit first
+                DOMHelper.findElementsWithAttribute(templateDOM, "nf-field-widget").forEach((field) => {
+                    let attributeName = field.getAttribute("nf-field-widget");
+                    let attribute;
+                    if (attributeName) {
+                        attribute = attributeIterator.getByName(attributeName);
+                    } else if (attributeIterator.hasNext()) {
+                        attribute = attributeIterator.getNext();
+                    }
+
+                    if (attribute) {
+                        attribute.renderer.render(field);
+                    }
+                });
+                iteratorHTML = iteratorHTML + xmlSerializer.serializeToString(templateDOM);
+            }
+            iterator.innerHTML = iteratorHTML;
+        });
+
         // Add explicit first
         DOMHelper.findElementsWithAttribute(layoutDOM, "nf-field-widget").forEach((field) => {
             let attributeName = field.getAttribute("nf-field-widget");
-            let attribute = attributeIterator.getByName(attributeName);
+            let attribute;
+            if (attributeName) {
+                attribute = attributeIterator.getByName(attributeName);
+            } else if (attributeIterator.hasNext()) {
+                attribute = attributeIterator.getNext();
+            }
+
             if (attribute) {
                 attribute.renderer.render(field);
             }
         });
 
-        // Add implicit
+        // Add remaining implicit
         while (attributeIterator.hasNext()) {
             let attribute = attributeIterator.getNext();
             let element = document.createElement("div");
@@ -61,7 +94,7 @@ export default class ModelRenderer {
             + this.model.localization.submitLabel
             + "\" /></div>";
 
-        htmlElement.innerHTML = new XMLSerializer().serializeToString(layoutDOM) + submit;
+        htmlElement.innerHTML = xmlSerializer.serializeToString(layoutDOM) + submit;
         this.bindListeners(htmlElement);
     }
 
