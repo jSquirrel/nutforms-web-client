@@ -101,13 +101,15 @@ export default class ModelRenderer {
             submit.addEventListener("click", (e) => {
                 e.preventDefault();
 
-                // Transform values from model into simple object
+                // Transform values from form into simple object
                 let valuesObject = {};
                 for (var k = 0, o = values.length; k < o; k++) {
                     let value = values[k];
                     let attributeName = value.getAttribute("nf-field-widget-value");
                     valuesObject[attributeName] = value.value;
                 }
+
+                model.formSubmitted(values);
 
                 this.model.trigger(ModelActions.SUBMITTED, model, valuesObject);
             });

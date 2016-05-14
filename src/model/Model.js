@@ -1,4 +1,5 @@
 import Observable from './../observer/Observable.js'
+import * as ModelActions from './../actions/ModelActions.js'
 
 export default class Model extends Observable {
 
@@ -32,6 +33,22 @@ export default class Model extends Observable {
         Object.keys(relations).forEach((key) => {
             this.relations[key].bind(this);
         });
+    }
+
+    /**
+     * Updates values of the model by settings values for each attribute.
+     * @param {object} values Object with Attribute names as keys and Attribute values as values.
+     * @throws Will throw an error if Attribute with given name does not exist.
+     */
+    formSubmitted(values) {
+        Object.keys(values).forEach((key) => {
+            if (this.attributes.hasOwnProperty(key)) {
+                this.attributes[key].setValue(values[key]);
+            } else if (this.relations.hasOwnProperty(key)) {
+                this.relations[key].setValue(values[key]);
+            }
+        });
+        this.trigger(ModelActions.SUBMITTED, this);
     }
 
 }
