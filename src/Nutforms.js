@@ -47,8 +47,8 @@ export default class Nutforms extends Observable {
         ]).then((values) => {
             this.trigger(NutformsActions.ASPECTS_FETCHED, values);
             let model = this.buildModel(...values, entityName, locale, widgetMapping, context);
-            model.listen(ModelActions.SUBMITTED, (model, values) => {
-                this.trigger(NutformsActions.FORM_SUBMITTED, model, values);
+            model.listen(ModelActions.SUBMITTED, (model) => {
+                this.trigger(NutformsActions.FORM_SUBMITTED, model);
             });
             this.trigger(NutformsActions.MODEL_BUILT, model);
             model.renderer.render(htmlElement);

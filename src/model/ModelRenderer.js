@@ -107,8 +107,6 @@ export default class ModelRenderer {
                 }
 
                 model.submit.submit(values);
-
-                this.model.trigger(ModelActions.SUBMITTED, model, valuesObject);
             });
         }
     }
