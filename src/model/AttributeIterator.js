@@ -20,7 +20,7 @@ export default class AttributeIterator {
      * @returns {boolean} True if there is next Attribute in the iterator, false if not.
      */
     hasNext() {
-        return this.attributes.length + this.attributes.length > 0;
+        return this.attributes.length + this.relations.length > 0;
     }
 
     /**
@@ -51,7 +51,7 @@ export default class AttributeIterator {
                 break;
             }
         }
-        for (let i = 0; i < this.attributes.length && result == null; ++i) {
+        for (let i = 0; i < this.relations.length && result == null; ++i) {
             if (this.relations[i].name === name) {
                 result = this.relations[i];
                 this.relations = this.removeFromArray(this.relations, result);
