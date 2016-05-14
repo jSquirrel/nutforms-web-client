@@ -90,8 +90,8 @@ And the following tag attributes:
 ```html
 <div class="form-group">
     <label nf-field-widget-label="{attribute.name}" for="{attribute.name}">{attribute.formLabel}</label>
-    <input nf-field-widget-value="{attribute.name}" class="form-control" id="{attribute.name}" name="{attribute.name}"
-           type="text">
+    <input nf-field-widget-value="{attribute.name}" class="form-control" name="{attribute.name}"
+           value="{attribute.value}" type="text">
 </div>
 ```
 
