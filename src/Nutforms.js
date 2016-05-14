@@ -52,7 +52,7 @@ export default class Nutforms extends Observable {
             });
             this.trigger(NutformsActions.MODEL_BUILT, model);
             model.renderer.render(htmlElement);
-            this.trigger(NutformsActions.FORM_RENDERED, model);
+            this.trigger(NutformsActions.FORM_RENDERED, model, htmlElement);
             console.log("Nutforms: form generated successfully!");
         });
     }
