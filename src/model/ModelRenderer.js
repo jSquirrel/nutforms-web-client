@@ -106,7 +106,7 @@ export default class ModelRenderer {
                     valuesObject[attributeName] = value.value;
                 }
 
-                model.submit.submit(values);
+                model.submit.submit(valuesObject);
             });
         }
     }
