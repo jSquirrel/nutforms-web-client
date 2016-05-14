@@ -117,10 +117,11 @@ var mappingFunction = function (attribute) {
 Each form field has a unique ID `<entityName>[<attributeName>]`.
 The `entityName` is the one you provided when calling `Nutforms.generateForm()`,
 and the `attributeName` is the unique name of single entity attribute.
-Example of such id would be `cz.cvut.fel.nutforms.example.model.Bug[log]` for
+
+Example of such ID is `cz.cvut.fel.nutforms.example.model.Bug[log]` for
 entity `cz.cvut.fel.nutforms.example.model.Bug` and attribute `log`.
 
-You can then access each field by its ID:
+You can simply access each field by its ID:
 ```javascript
 var formField = document.getElementByID("cz.cvut.fel.nutforms.example.model.Bug[log]");
 ```
