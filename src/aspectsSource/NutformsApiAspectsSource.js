@@ -10,7 +10,6 @@ export default class NutformsApiAspectsSource {
      */
     constructor(apiAddress, apiUser, apiPassword) {
         this.API_ENDPOINT = 'api/';
-        this.RULES_ENDPOINT = 'rules/';
         this.LAYOUT_ENDPOINT = 'layout/';
         this.LOCALIZATION_ENDPOINT = 'localization/';
         this.CLASS_METADATA_ENDPOINT = 'meta/class/';
@@ -26,13 +25,13 @@ export default class NutformsApiAspectsSource {
             try {
                 return response.json();
             } catch (err) {
-                console.log("Error while parsing JSON", response);
+                console.error("Error while parsing JSON", response);
                 return null;
             }
         };
         this._logResponse = (message) => {
             return response => {
-                console.log(message, response);
+                //console.log(message, response);
                 return response
             };
         };
