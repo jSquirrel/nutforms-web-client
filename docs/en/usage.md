@@ -1,12 +1,105 @@
 # Nutforms Web Client Usage
 
+## Defining aspects
+
+Before you use the library, you must define the aspects
+of your forms.
+
+### Model structure
+
+Model structure is usually defined in lower layers of your system,
+e.g., via your ORM tool. The Nutforms library accepts serialized metadata
+of your model in JSON format.
+
+```
+
+```
+
+A good way to provide such data is inspection of your domain model.
+[Nutforms Server](https://github.com/jSquirrel/nutforms-server) 
+provides such inspection for Java platform, but you can do it manually.
+
+### Layout
+
+Layouts are defined as HTML templates extended by special tag attributes,
+which serve as instructions for the renderer, which then inject
+concrete widgets to the layout.
+
+You c an use the following tag attributes:
+- `nf-form-label` - To denote tag, into which the localized form label is injected
+- `nf-field-widget="<attributeName>"` - To denote tag, into which attribute's widget is injected
+
+```html
+<form class="form" role="form">
+    <h1 nf-form-label="nf-form-label"></h1>
+    <div nf-field-widget="id"></div>
+    <div nf-field-widget="description"></div>
+    <div nf-field-widget="log"></div>
+</form>
+```
+
+### Widgets
+
+Widgets are defined as HTML templates extended by custom tag attributes
+and instructions which are replaced by values from the model.
+
+You can use the following instructions:
+- `{atribute.name}` for name of the attribute
+- `{attribute.label}` for label of the attribute
+- `{attribute.value}` for value of the attribute
+
+And the following tag attributes:
+- `nf-field-widget-label` - for element which contains label of the attribute
+- `nf-field-widget-value` - for element which contains value of the attribute
+
+```html
+<div class="form-group">
+    <label nf-field-widget-label="{attribute.name}" for="{attribute.name}">{attribute.formLabel}</label>
+    <input nf-field-widget-value="{attribute.name}" class="form-control" id="{attribute.name}" name="{attribute.name}"
+           type="text">
+</div>
+```
+
+### Localization
+
+Localization must be defined separately for each entity and business context
+in simple JSON format where the follwing keys are used:
+- `form.<attributeName>.label` - for label of each attribute
+- `form.submit.value` - for value of the submit button
+- `form.label` - for label of the form
+
+```javascript
+{
+    "form.id.label": "ID",
+    "form.description.label": "Description",
+    "form.log.label": "Log",
+    "form.label": "Create form",
+    "form.submit.label": "Create"
+}
+```
+
+### Values
+
+The values of entity are represented by simple JSON document
+with one object, where the keys are names of the attributes
+and the values are the values of the attributes.
+
+```javascript
+{
+    "id": 1,
+    "description": "Bug #1",
+    "log": "java.lang.NullPointerException ..."
+}
+```
+
 ## Importing library
 
-First, you must import the Nutforms client library.
+In order to enable the automatic form generation, you must import the Nutforms client library.
 
 ```html
 <script src="../../dist/nutforms.js"></script>
 ```
+
 
 ## Using library
 
