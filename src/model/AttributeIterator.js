@@ -5,8 +5,14 @@ export default class AttributeIterator {
      * @param {Model} model The Model instance.
      */
     constructor(model) {
-        this.attributes = model.attributes;
-        this.relations = model.relations;
+        this.attributes = [];
+        this.relations = [];
+        Object.keys(model.attributes).forEach((key) => {
+            this.attributes.push(model.attributes[key]);
+        });
+        Object.keys(model.relations).forEach((key) => {
+            this.relations.push(model.relations[key]);
+        });
     }
 
     /**
@@ -14,7 +20,7 @@ export default class AttributeIterator {
      * @returns {boolean} True if there is next Attribute in the iterator, false if not.
      */
     hasNext() {
-        return Object.keys(this.attributes).length + Object.keys(this.relations).length > 0;
+        return this.attributes.length + this.attributes.length > 0;
     }
 
     /**
@@ -22,16 +28,10 @@ export default class AttributeIterator {
      * @returns {Attribute|null} The Attribute or null if there is none left.
      */
     getNext() {
-        if (Object.keys(this.attributes).length > 0) {
-            let attributeName = Object.keys(this.attributes).shift();
-            let attribute = this.attributes[attributeName];
-            delete this.attributes[attributeName];
-            return attribute;
-        } else if (Object.keys(this.relations).length > 0) {
-            let relationName = Object.keys(this.relations).shift();
-            let relation = this.relations[relationName];
-            delete this.relations[relationName];
-            return relation;
+        if (this.attributes.length > 0) {
+            return this.attributes.shift();
+        } else if (this.relations.length > 0) {
+            return this.relations.shift();
         } else {
             return null;
         }
@@ -43,17 +43,38 @@ export default class AttributeIterator {
      * @returns {Attribute}
      */
     getByName(name) {
-        if (this.attributes.hasOwnProperty(name)) {
-            let attribute = this.attributes[name];
-            delete this.attributes[name];
-            return attribute;
-        } else if (this.relations.hasOwnProperty(name)) {
-            let relation = this.relations[name];
-            delete this.relations[name];
-            return relation;
-        } else {
-            return null;
+        let result = null;
+        for (let i = 0; i < this.attributes.length; ++i) {
+            if (this.attributes[i].name === name) {
+                result = this.attributes[i];
+                this.attributes = this.removeFromArray(this.attributes, result);
+                break;
+            }
         }
+        for (let i = 0; i < this.attributes.length && result == null; ++i) {
+            if (this.relations[i].name === name) {
+                result = this.relations[i];
+                this.relations = this.removeFromArray(this.relations, result);
+                break;
+            }
+        }
+        return result;
     }
+
+    /**
+     * Removes item by its value from array.
+     * @param {array} array The array
+     * @returns {array}
+     */
+    removeFromArray(array) {
+        let what, args = arguments, length = args.length, auxillary;
+        while (length > 1 && array.length) {
+            what = args[--length];
+            while ((auxillary = array.indexOf(what)) !== -1) {
+                array.splice(auxillary, 1);
+            }
+        }
+        return array;
+    };
 
 }
