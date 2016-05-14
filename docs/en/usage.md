@@ -154,7 +154,7 @@ You can define your own `AspectsSource` implementation and provide it to the lib
 Make sure your object provides the following functions used by the weaver:
 - `fetchStructureMetadata(entityName)` for fetching your model structure metadata for given entity
 - `fetchValues(entityName, entityId)` for fetching entity values
-- `fetchLocalizationData(entityName, locale)` for fetching localization of your entity in concrete locale
+- `fetchLocalizationData(entityName, locale, context)` for fetching localization of your entity in oncrete context and in concrete locale
 - `fetchLayout(layout)` for fetching form layout with given identifier
 - `fetchWidget(widget)` for fetching attribute widget with given identifier
 

@@ -77,10 +77,11 @@ export default class NutformsApiAspectsSource {
      * Fetches localization aspect data for entity in locale.
      * @param {string} entityName Name of the entity.
      * @param {string} locale Identifier of the locale.
+     * @param {string} context Name of the business context.
      * @returns {Promise}
      */
-    fetchLocalizationData(entityName, locale) {
-        return fetch(this._buildUrl(this.LOCALIZATION_ENDPOINT + locale + '/' + entityName + '/new')) // TODO: remove the context
+    fetchLocalizationData(entityName, locale, context) {
+        return fetch(this._buildUrl(this.LOCALIZATION_ENDPOINT + locale + '/' + entityName + '/' + context))
             .then(this._toJson)
             .then(this._logResponse("Localization data loaded from API"))
             ;

@@ -41,7 +41,7 @@ export default class Nutforms extends Observable {
     generateForm(htmlElement, entityName, locale, entityId, layout, widgetMapping, context) {
         Promise.all([
             this.aspectsSource.fetchStructureMetadata(entityName),
-            this.aspectsSource.fetchLocalizationData(entityName, locale),
+            this.aspectsSource.fetchLocalizationData(entityName, locale, context),
             this.aspectsSource.fetchValues(entityName, entityId),
             this.aspectsSource.fetchLayout(layout)
         ]).then((values) => {
