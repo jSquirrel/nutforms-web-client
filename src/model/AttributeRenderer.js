@@ -41,13 +41,7 @@ export default class AttributeRenderer {
      * @private
      */
     getWidgetName() {
-        return this.attribute.model.widgetMapping(
-            this.attribute.model.entityName,
-            this.attribute.model.context,
-            this.attribute.name,
-            this.attribute.type,
-            this.attribute.primary
-        );
+        return this.attribute.model.widgetMapping(this.attribute);
     }
 
     /**
