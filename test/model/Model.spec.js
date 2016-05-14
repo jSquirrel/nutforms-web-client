@@ -13,6 +13,7 @@ describe('Model', () => {
     describe('#constructor', () => {
         it('initializes the parameters and binds the components', () => {
             let entityName = "entity name";
+            let locale = "locale identifier";
             let attributes = [
                 {
                     name: "attr1",
@@ -61,9 +62,10 @@ describe('Model', () => {
             let widgetMapping = "widget mapping function";
             let context = "business operation name";
 
-            let model = new Model(entityName, attributes, relations, localization, renderer, layout, submit, aspectsSource, widgetMapping, context);
+            let model = new Model(entityName, locale, attributes, relations, localization, renderer, layout, submit, aspectsSource, widgetMapping, context);
 
             model.entityName.should.equal(entityName);
+            model.locale.should.equal(locale);
             model.attributes.should.equal(attributes);
             model.relations.should.equal(relations);
             model.localization.should.equal(localization);

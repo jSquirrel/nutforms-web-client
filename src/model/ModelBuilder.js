@@ -9,6 +9,7 @@ export default class ModelBuilder {
      */
     constructor() {
         this.entityName = null;
+        this.locale = null;
         this.attributeBuilders = {};
         this.relationBuilders = {};
         this.localization = null;
@@ -27,6 +28,16 @@ export default class ModelBuilder {
      */
     setEntityName(entityName) {
         this.entityName = entityName;
+        return this;
+    }
+
+    /**
+     * Sets name of the locale.
+     * @param {string} locale Identifier of the locale.
+     * @returns {ModelBuilder}
+     */
+    setLocale(locale) {
+        this.locale = locale;
         return this;
     }
 
@@ -153,6 +164,7 @@ export default class ModelBuilder {
     build() {
         return new Model(
             this.entityName,
+            this.locale,
             this.buildAttributes(),
             this.buildRelations(),
             this.localization,

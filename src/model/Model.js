@@ -4,7 +4,8 @@ export default class Model extends Observable {
 
     /**
      * Represents a Model and holds all its components and contextual parameters.
-     * @param {string} entityName               Name of the represented entity-
+     * @param {string} entityName               Name of the represented entity.
+     * @param {string} locale                   Identifier of the locale.
      * @param {object} attributes               Map of Model's Attributes.
      * @param {object} relations                Map of Model's Relations.
      * @param {ModelLocalization} localization  Localization of the Model.
@@ -15,9 +16,10 @@ export default class Model extends Observable {
      * @param {function} widgetMapping          Widget mapping function.
      * @param {string} context                  Business operation identifier.
      */
-    constructor(entityName, attributes, relations, localization, renderer, layout, submit, aspectsSource, widgetMapping, context) {
+    constructor(entityName, locale, attributes, relations, localization, renderer, layout, submit, aspectsSource, widgetMapping, context) {
         super();
         this.entityName = entityName;
+        this.locale = locale;
         this.attributes = attributes;
         this.relations = relations;
         this.localization = localization ? localization.bind(this) : localization;

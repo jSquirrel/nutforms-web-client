@@ -46,7 +46,7 @@ export default class Nutforms extends Observable {
             this.aspectsSource.fetchLayout(layout)
         ]).then((values) => {
             this.trigger(NutformsActions.ASPECTS_FETCHED, values);
-            let model = this.buildModel(...values, entityName, widgetMapping, context);
+            let model = this.buildModel(...values, entityName, locale, widgetMapping, context);
             model.listen(ModelActions.SUBMITTED, (model, values) => {
                 this.trigger(NutformsActions.FORM_SUBMITTED, model, values);
             });
@@ -65,11 +65,12 @@ export default class Nutforms extends Observable {
      * @param {*} values
      * @param {string} layout
      * @param {string} entityName
+     * @param {string} locale
      * @param {function} widgetMapping
      * @param {string} context
      * @returns {Model}
      */
-    buildModel(structureMetadata, localizationData, values, layout, entityName, widgetMapping, context) {
+    buildModel(structureMetadata, localizationData, values, layout, entityName, locale, widgetMapping, context) {
         // Preps the parsers
         let structureParser = new ModelStructureParser();
         let valuesParser = new ValuesParser();
@@ -78,6 +79,7 @@ export default class Nutforms extends Observable {
         // Creates builder and sets context parameters
         let builder = new ModelBuilder()
                 .setEntityName(entityName)
+                .setLocale(locale)
                 .addRenderer(new ModelRenderer())
                 .addLayout(new Layout(layout))
                 .addSubmit(new Submit())

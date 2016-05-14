@@ -20,6 +20,7 @@ describe('ModelBuilder', () => {
             let modelBuilder = new ModelBuilder();
 
             let entityName = "entity name";
+            let locale = "locale identifier";
             let localization = new ModelLocalization("label", "placeholder");
             let renderer = new ModelRenderer();
             let submit = new Submit();
@@ -34,6 +35,7 @@ describe('ModelBuilder', () => {
 
             let model = modelBuilder
                 .setEntityName(entityName)
+                .setLocale(locale)
                 .addLocalization(localization)
                 .addRenderer(renderer)
                 .addLayout(layout)
@@ -44,6 +46,7 @@ describe('ModelBuilder', () => {
                 .build();
 
             model.entityName.should.equal(entityName);
+            model.locale.should.equal(locale);
             model.localization.should.equal(localization);
             model.renderer.should.equal(renderer);
             model.layout.should.equal(layout);
