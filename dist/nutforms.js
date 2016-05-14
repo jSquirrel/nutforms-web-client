@@ -1733,7 +1733,7 @@
 	        value: function injectWidgetValues(widgetString) {
 	            widgetString = widgetString.replace(new RegExp('{attribute.name}', 'g'), this.attribute.name);
 	            widgetString = widgetString.replace(new RegExp('{attribute.formLabel}', 'g'), this.attribute.localization.label);
-	            widgetString = widgetString.replace(new RegExp('{attribute.value}', 'g'), this.attribute.value);
+	            widgetString = widgetString.replace(new RegExp('{attribute.value}', 'g'), this.attribute.value ? this.attribute.value : "");
 	            return widgetString;
 	        }
 	    }]);
