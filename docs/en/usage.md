@@ -11,8 +11,43 @@ Model structure is usually defined in lower layers of your system,
 e.g., via your ORM tool. The Nutforms library accepts serialized metadata
 of your model in JSON format.
 
-```
+The following structure is required:
+- `attributes` - array of attributes
+    - `name` - Name of the attribute
+    - `type` - Type of the attribute
+    - `is_primary` - Boolean flag denoting whether the attribute is primary
+- `relationships` - array of relationships
+    - `name` - Name of the relation
+    - `type` - Type of the relation
+    - `target_class` - Name of the target class
 
+```javascript
+{
+    "attributes": [
+        {
+            "name": "id",
+            "type": "java.lang.Long",
+            "is_primary": true
+        },
+        {
+            "name": "description",
+            "type": "java.lang.String",
+            "is_primary": false
+        },
+        {
+            "name": "log",
+            "type": "java.lang.String",
+            "is_primary": false
+        }
+    ],
+    "relationships": [
+        {
+            "name": "project",
+            "type": "ToOne",
+            "target_class": "cz.cvut.fel.nutforms.example.model.Project"
+        }
+    ]
+}
 ```
 
 A good way to provide such data is inspection of your domain model.
