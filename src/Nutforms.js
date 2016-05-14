@@ -1,6 +1,7 @@
 import ModelBuilder from './model/ModelBuilder.js'
 import ModelRenderer from './model/ModelRenderer.js'
 import Layout from './model/Layout.js'
+import Submit from './model/Submit.js'
 import Observable from './observer/Observable.js'
 import ModelStructureParser from './parser/ModelStructureParser.js'
 import ValuesParser from './parser/ValuesParser.js'
@@ -79,6 +80,7 @@ export default class Nutforms extends Observable {
                 .setEntityName(entityName)
                 .addRenderer(new ModelRenderer())
                 .addLayout(new Layout(layout))
+                .addSubmit(new Submit())
                 .addAspectsSource(this.aspectsSource)
                 .setWidgetMapping(widgetMapping)
                 .setContext(context)

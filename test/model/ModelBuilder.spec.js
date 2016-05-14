@@ -8,7 +8,8 @@ chai.should();
 import ModelBuilder from '../../src/model/ModelBuilder.js';
 import ModelLocalization from '../../src/model/ModelLocalization.js';
 import ModelRenderer from '../../src/model/ModelRenderer.js';
-import Layout from '../../src/model/Layout.js'
+import Layout from '../../src/model/Layout.js';
+import Submit from '../../src/model/Submit.js';
 import AttributeBuilder from '../../src/model/AttributeBuilder.js';
 import RelationBuilder from '../../src/model/RelationBuilder.js';
 
@@ -21,6 +22,7 @@ describe('ModelBuilder', () => {
             let entityName = "entity name";
             let localization = new ModelLocalization("label", "placeholder");
             let renderer = new ModelRenderer();
+            let submit = new Submit();
             let layout = new Layout("layout string");
             let aspectsSource = {"name": "NutformsApiAspectsSource"};
             let widgetMapping = "widget mapping function";
@@ -35,6 +37,7 @@ describe('ModelBuilder', () => {
                 .addLocalization(localization)
                 .addRenderer(renderer)
                 .addLayout(layout)
+                .addSubmit(submit)
                 .addAspectsSource(aspectsSource)
                 .setWidgetMapping(widgetMapping)
                 .setContext(context)
@@ -44,6 +47,7 @@ describe('ModelBuilder', () => {
             model.localization.should.equal(localization);
             model.renderer.should.equal(renderer);
             model.layout.should.equal(layout);
+            model.submit.should.equal(submit);
             model.aspectsSource.should.equal(aspectsSource);
             model.widgetMapping.should.equal(widgetMapping);
             model.context.should.equal(context);

@@ -14,6 +14,7 @@ export default class ModelBuilder {
         this.localization = null;
         this.renderer = null;
         this.layout = null;
+        this.submit = null;
         this.aspectsSource = null;
         this.widgetMapping = null;
         this.context = null;
@@ -106,6 +107,16 @@ export default class ModelBuilder {
     }
 
     /**
+     * Adds Submit.
+     * @param {Submit} submit The Submit to add.
+     * @returns {ModelBuilder}
+     */
+    addSubmit(submit) {
+        this.submit = submit;
+        return this;
+    }
+
+    /**
      * Adds AspectsSource.
      * @param {object} aspectsSource The AspectsSource to add.
      * @returns {ModelBuilder}
@@ -147,6 +158,7 @@ export default class ModelBuilder {
             this.localization,
             this.renderer,
             this.layout,
+            this.submit,
             this.aspectsSource,
             this.widgetMapping,
             this.context

@@ -109,7 +109,7 @@ export default class ModelRenderer {
                     valuesObject[attributeName] = value.value;
                 }
 
-                model.formSubmitted(values);
+                model.submit.submit(values);
 
                 this.model.trigger(ModelActions.SUBMITTED, model, valuesObject);
             });

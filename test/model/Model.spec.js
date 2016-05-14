@@ -50,11 +50,18 @@ describe('Model', () => {
                     return this;
                 }
             };
+            let submit = {
+                _bindCalled: false,
+                bind: function (model) {
+                    this._bindCalled = true;
+                    return this;
+                }
+            };
             let aspectsSource = {"name": "NutformsApiAspectsSource"};
             let widgetMapping = "widget mapping function";
             let context = "business operation name";
 
-            let model = new Model(entityName, attributes, relations, localization, renderer, layout, aspectsSource, widgetMapping, context);
+            let model = new Model(entityName, attributes, relations, localization, renderer, layout, submit, aspectsSource, widgetMapping, context);
 
             model.entityName.should.equal(entityName);
             model.attributes.should.equal(attributes);
@@ -64,6 +71,7 @@ describe('Model', () => {
             model.renderer.should.equal(renderer);
             renderer.model.should.equal(model);
             model.layout.should.equal(layout);
+            model.submit.should.equal(submit);
             model.aspectsSource.should.equal(aspectsSource);
             model.widgetMapping.should.equal(widgetMapping);
             model.context.should.equal(context);
@@ -73,6 +81,7 @@ describe('Model', () => {
             relations[0]._bindCalled.should.equal(true);
 
             layout._bindCalled.should.equal(true);
+            submit._bindCalled.should.equal(true);
         });
     });
 });
