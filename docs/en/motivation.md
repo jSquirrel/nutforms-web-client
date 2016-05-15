@@ -2,7 +2,7 @@
 
 ## The stresses of user interface development
 
-Developing suer interface (UI) can be very tedious and error-prone.
+Developing user interface (UI) can be very tedious and error-prone.
 It is estimated that UI consumes 48 % of your
 application code and 50 % of the development time ([source](https://www.researchgate.net/profile/Richard_Kennard/publication/220376640_Towards_a_general_purpose_architecture_for_UI_generation/links/0fcfd4fcc4cac48bce000000.pdf)).
 The UI then must reflect many concerns which are already
