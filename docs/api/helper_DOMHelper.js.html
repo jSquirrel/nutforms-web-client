@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: model/ModelLocalization.js</title>
+    <title>JSDoc: Source: helper/DOMHelper.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: model/ModelLocalization.js</h1>
+    <h1 class="page-title">Source: helper/DOMHelper.js</h1>
 
     
 
@@ -26,26 +26,24 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>export default class ModelLocalization {
+            <pre class="prettyprint source linenums"><code>export default class DOMHelper {
 
     /**
-     * Holds localization aspect data for Model.
-     * @param {string} formLabel        Label of the form.
-     * @param {string} submitLabel      Label of form's submit button.
+     * Finds all elements in the document which have attribute with given name.
+     *
+     * @param {Element|HTMLDocument} doc
+     * @param {string} attribute
+     * @returns {Array}
      */
-    constructor(formLabel, submitLabel) {
-        this.formLabel = formLabel;
-        this.submitLabel = submitLabel;
-    }
-
-    /**
-     * Binds to Model instance.
-     * @param {Model} model The Model to bind to.
-     * @returns {ModelLocalization}
-     */
-    bind(model) {
-        this.model = model;
-        return this;
+    static findElementsWithAttribute(doc, attribute) {
+        let matchingElements = [];
+        let allElements = doc.getElementsByTagName('*');
+        for (var i = 0, n = allElements.length; i &lt; n; i++) {
+            if (allElements[i].getAttribute(attribute) !== null) {
+                matchingElements.push(allElements[i]);
+            }
+        }
+        return matchingElements;
     }
 
 }

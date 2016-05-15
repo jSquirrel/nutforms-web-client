@@ -27,6 +27,8 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import AttributeIterator from './AttributeIterator.js'
+import DOMHelper from './../helper/DOMHelper.js'
+import * as ModelActions from './../actions/ModelActions.js'
 
 export default class ModelRenderer {
 
@@ -52,6 +54,8 @@ export default class ModelRenderer {
      */
     render(htmlElement) {
         let parser = new DOMParser();
+        let xmlSerializer = new XMLSerializer();
+
         let layoutDOM = parser.parseFromString(this.model.layout.layoutString, "text/html");
         let attributeIterator = new AttributeIterator(this.model);
 
@@ -60,17 +64,48 @@ export default class ModelRenderer {
             formLabel.innerHTML = this.model.localization.formLabel;
         });
 
+        // Check for iterators
+        DOMHelper.findElementsWithAttribute(layoutDOM, "nf-field-iterator").forEach((iterator) => {
+            let template = iterator.innerHTML;
+            let iteratorHTML = "";
+            while (attributeIterator.hasNext()) {
+                let templateDOM = parser.parseFromString(template, "text/html");
+                // Add explicit first
+                DOMHelper.findElementsWithAttribute(templateDOM, "nf-field-widget").forEach((field) => {
+                    let attributeName = field.getAttribute("nf-field-widget");
+                    let attribute;
+                    if (attributeName) {
+                        attribute = attributeIterator.getByName(attributeName);
+                    } else if (attributeIterator.hasNext()) {
+                        attribute = attributeIterator.getNext();
+                    }
+
+                    if (attribute) {
+                        attribute.renderer.render(field);
+                    }
+                });
+                iteratorHTML = iteratorHTML + xmlSerializer.serializeToString(templateDOM);
+            }
+            iterator.innerHTML = iteratorHTML;
+        });
+
         // Add explicit first
         DOMHelper.findElementsWithAttribute(layoutDOM, "nf-field-widget").forEach((field) => {
             let attributeName = field.getAttribute("nf-field-widget");
-            let attribute = attributeIterator.getByName(attributeName);
+            let attribute;
+            if (attributeName) {
+                attribute = attributeIterator.getByName(attributeName);
+            } else if (attributeIterator.hasNext()) {
+                attribute = attributeIterator.getNext();
+            }
+
             if (attribute) {
                 attribute.renderer.render(field);
             }
         });
 
-        // Add implicit
-        while(attributeIterator.hasNext()) {
+        // Add remaining implicit
+        while (attributeIterator.hasNext()) {
             let attribute = attributeIterator.getNext();
             let element = document.createElement("div");
             attribute.renderer.render(element);
@@ -87,31 +122,54 @@ export default class ModelRenderer {
             + this.model.localization.submitLabel
             + "\" />&lt;/div>";
 
-        // TODO: bind listeners
-
-        htmlElement.innerHTML = new XMLSerializer().serializeToString(layoutDOM) + submit;
+        htmlElement.innerHTML = xmlSerializer.serializeToString(layoutDOM) + submit;
+        this.bindListeners(htmlElement);
     }
 
-}
-
-class DOMHelper {
-
     /**
-     * Finds all elements in the document which have attribute with given name.
-     *
-     * @param {Element|HTMLDocument} doc
-     * @param {string} attribute
-     * @returns {Array}
+     * Binds listeners to the generated form.
+     * @param {HTMLElement} htmlElement The HTML element containing the form.
      */
-    static findElementsWithAttribute(doc, attribute) {
-        let matchingElements = [];
-        let allElements = doc.getElementsByTagName('*');
-        for (var i = 0, n = allElements.length; i &lt; n; i++) {
-            if (allElements[i].getAttribute(attribute) !== null) {
-                matchingElements.push(allElements[i]);
-            }
+    bindListeners(htmlElement) {
+        let values = DOMHelper.findElementsWithAttribute(htmlElement, "nf-field-widget-value");
+        for (var k = 0, o = values.length; k &lt; o; k++) {
+            let value = values[k];
+            let attributeName = value.getAttribute("nf-field-widget-value");
+            let attribute = this.model.attributes[attributeName];
+
+            // Adding event listeners to attributes
+            value.addEventListener("keyup", () => {
+                attribute.setValue(value.value);
+            }, false);
+            value.addEventListener("change", () => {
+                attribute.setValue(value.value);
+            }, false);
+            value.addEventListener("blur", () => {
+                attribute.setValue(value.value);
+            }, false);
+
+            // Set unique id
+            value.setAttribute("id", this.model.entityName + "[" + attributeName + "]");
         }
-        return matchingElements;
+
+        let submits = DOMHelper.findElementsWithAttribute(htmlElement, "nf-submit");
+        let model = this.model;
+        if (submits.length > 0) {
+            let submit = submits.shift(); // TODO: Improvement: what about other submits?
+            submit.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                // Transform values from form into simple object
+                let valuesObject = {};
+                for (var k = 0, o = values.length; k &lt; o; k++) {
+                    let value = values[k];
+                    let attributeName = value.getAttribute("nf-field-widget-value");
+                    valuesObject[attributeName] = value.value;
+                }
+
+                model.submit.submit(valuesObject);
+            });
+        }
     }
 
 }
@@ -125,13 +183,13 @@ class DOMHelper {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Attribute.html">Attribute</a></li><li><a href="AttributeBuilder.html">AttributeBuilder</a></li><li><a href="AttributeIterator.html">AttributeIterator</a></li><li><a href="AttributeLocalization.html">AttributeLocalization</a></li><li><a href="AttributeRenderer.html">AttributeRenderer</a></li><li><a href="Layout.html">Layout</a></li><li><a href="LocalizationParser.html">LocalizationParser</a></li><li><a href="Model.html">Model</a></li><li><a href="ModelBuilder.html">ModelBuilder</a></li><li><a href="ModelLocalization.html">ModelLocalization</a></li><li><a href="ModelRenderer.html">ModelRenderer</a></li><li><a href="ModelStructureParser.html">ModelStructureParser</a></li><li><a href="NutformsApiAspectsSource.html">NutformsApiAspectsSource</a></li><li><a href="Observable.html">Observable</a></li><li><a href="Relation.html">Relation</a></li><li><a href="RelationBuilder.html">RelationBuilder</a></li><li><a href="ValuesParser.html">ValuesParser</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Attribute.html">Attribute</a></li><li><a href="AttributeBuilder.html">AttributeBuilder</a></li><li><a href="AttributeIterator.html">AttributeIterator</a></li><li><a href="AttributeLocalization.html">AttributeLocalization</a></li><li><a href="AttributeRenderer.html">AttributeRenderer</a></li><li><a href="Layout.html">Layout</a></li><li><a href="LocalizationParser.html">LocalizationParser</a></li><li><a href="Model.html">Model</a></li><li><a href="ModelBuilder.html">ModelBuilder</a></li><li><a href="ModelLocalization.html">ModelLocalization</a></li><li><a href="ModelRenderer.html">ModelRenderer</a></li><li><a href="ModelStructureParser.html">ModelStructureParser</a></li><li><a href="Nutforms.html">Nutforms</a></li><li><a href="NutformsApiAspectsSource.html">NutformsApiAspectsSource</a></li><li><a href="Observable.html">Observable</a></li><li><a href="Relation.html">Relation</a></li><li><a href="RelationBuilder.html">RelationBuilder</a></li><li><a href="Submit.html">Submit</a></li><li><a href="ValuesParser.html">ValuesParser</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed May 11 2016 19:52:12 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun May 15 2016 11:34:00 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

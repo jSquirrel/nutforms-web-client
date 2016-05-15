@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Nutforms.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Nutforms.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import ModelBuilder from './model/ModelBuilder.js'
+import ModelRenderer from './model/ModelRenderer.js'
+import Layout from './model/Layout.js'
+import Submit from './model/Submit.js'
+import Observable from './observer/Observable.js'
+import ModelStructureParser from './parser/ModelStructureParser.js'
+import ValuesParser from './parser/ValuesParser.js'
+import LocalizationParser from './parser/LocalizationParser.js'
+import * as ModelActions from './actions/ModelActions.js'
+import * as NutformsActions from './actions/NutformsActions.js'
+
+export default class Nutforms extends Observable {
+
+    /**
+     * Facade for Nutforms form generation subsystem.
+     */
+    constructor() {
+        super();
+        this.aspectsSource = null;
+    }
+
+    /**
+     * Sets AspectsSource implementation to the library.
+     * @param source
+     */
+    setAspectsSource(source) {
+        this.aspectsSource = source;
+    }
+
+    /**
+     * Dynamically generates the form, weaves all the aspects in and binds it to the given HTML Element.
+     *
+     * @param {HTMLElement} htmlElement     Element to bind the form to.
+     * @param {string} entityName           Unique name of the entity.
+     * @param {string} locale               Unique name of the locale.
+     * @param {number} entityId             ID of the entity.
+     * @param {string} layout               Unique name of the layout.
+     * @param {function} widgetMapping      Widget mapping function.
+     * @param {string} context              Unique name of the business operation.
+     */
+    generateForm(htmlElement, entityName, locale, entityId, layout, widgetMapping, context) {
+        Promise.all([
+            this.aspectsSource.fetchStructureMetadata(entityName),
+            this.aspectsSource.fetchLocalizationData(entityName, locale, context),
+            this.aspectsSource.fetchValues(entityName, entityId),
+            this.aspectsSource.fetchLayout(layout)
+        ]).then((values) => {
+            this.trigger(NutformsActions.ASPECTS_FETCHED, values);
+            let model = this.buildModel(...values, entityName, locale, widgetMapping, context);
+            model.listen(ModelActions.SUBMITTED, (model) => {
+                this.trigger(NutformsActions.FORM_SUBMITTED, model);
+            });
+            this.trigger(NutformsActions.MODEL_BUILT, model);
+            model.renderer.render(htmlElement);
+            this.trigger(NutformsActions.FORM_RENDERED, model, htmlElement);
+            console.log("Nutforms: form generated successfully!");
+        });
+    }
+
+    /**
+     * Builds the Rich Model from context parameters and aspects definitions.
+     *
+     * @param {*} structureMetadata
+     * @param {*} localizationData
+     * @param {*} values
+     * @param {string} layout
+     * @param {string} entityName
+     * @param {string} locale
+     * @param {function} widgetMapping
+     * @param {string} context
+     * @returns {Model}
+     */
+    buildModel(structureMetadata, localizationData, values, layout, entityName, locale, widgetMapping, context) {
+        // Preps the parsers
+        let structureParser = new ModelStructureParser();
+        let valuesParser = new ValuesParser();
+        let localizationParser = new LocalizationParser();
+
+        // Creates builder and sets context parameters
+        let builder = new ModelBuilder()
+                .setEntityName(entityName)
+                .setLocale(locale)
+                .addRenderer(new ModelRenderer())
+                .addLayout(new Layout(layout))
+                .addSubmit(new Submit())
+                .addAspectsSource(this.aspectsSource)
+                .setWidgetMapping(widgetMapping)
+                .setContext(context)
+            ;
+
+        // Calls the aspect DSLs parsers, who call appropriate functions on ModelBuilder
+        structureParser.parse(structureMetadata, builder);
+        valuesParser.parse(values, builder);
+        localizationParser.parse(localizationData, builder);
+
+        return builder.build();
+    }
+
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Attribute.html">Attribute</a></li><li><a href="AttributeBuilder.html">AttributeBuilder</a></li><li><a href="AttributeIterator.html">AttributeIterator</a></li><li><a href="AttributeLocalization.html">AttributeLocalization</a></li><li><a href="AttributeRenderer.html">AttributeRenderer</a></li><li><a href="Layout.html">Layout</a></li><li><a href="LocalizationParser.html">LocalizationParser</a></li><li><a href="Model.html">Model</a></li><li><a href="ModelBuilder.html">ModelBuilder</a></li><li><a href="ModelLocalization.html">ModelLocalization</a></li><li><a href="ModelRenderer.html">ModelRenderer</a></li><li><a href="ModelStructureParser.html">ModelStructureParser</a></li><li><a href="Nutforms.html">Nutforms</a></li><li><a href="NutformsApiAspectsSource.html">NutformsApiAspectsSource</a></li><li><a href="Observable.html">Observable</a></li><li><a href="Relation.html">Relation</a></li><li><a href="RelationBuilder.html">RelationBuilder</a></li><li><a href="Submit.html">Submit</a></li><li><a href="ValuesParser.html">ValuesParser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun May 15 2016 11:34:00 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

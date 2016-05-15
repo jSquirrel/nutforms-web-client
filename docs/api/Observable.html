@@ -93,7 +93,7 @@ receive event notifications.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model_Observable.js.html">model/Observable.js</a>, <a href="model_Observable.js.html#line9">line 9</a>
+        <a href="observer_Observable.js.html">observer/Observable.js</a>, <a href="observer_Observable.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -136,6 +136,159 @@ receive event notifications.
 
     
         <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="hasObserver"><span class="type-signature"></span>hasObserver<span class="signature">(eventName)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Checks, whether this object has any observers registered for given event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>eventName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the name of the event</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="observer_Observable.js.html">observer/Observable.js</a>, <a href="observer_Observable.js.html#line76">line 76</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    eventName <code>true</code> if this object has one or more observers for given event
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
 
         
             
@@ -268,7 +421,7 @@ receive event notifications.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model_Observable.js.html">model/Observable.js</a>, <a href="model_Observable.js.html#line20">line 20</a>
+        <a href="observer_Observable.js.html">observer/Observable.js</a>, <a href="observer_Observable.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -442,7 +595,7 @@ receive event notifications.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model_Observable.js.html">model/Observable.js</a>, <a href="model_Observable.js.html#line46">line 46</a>
+        <a href="observer_Observable.js.html">observer/Observable.js</a>, <a href="observer_Observable.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -599,7 +752,7 @@ receive event notifications.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model_Observable.js.html">model/Observable.js</a>, <a href="model_Observable.js.html#line32">line 32</a>
+        <a href="observer_Observable.js.html">observer/Observable.js</a>, <a href="observer_Observable.js.html#line32">line 32</a>
     </li></ul></dd>
     
 
@@ -641,13 +794,13 @@ receive event notifications.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Attribute.html">Attribute</a></li><li><a href="AttributeBuilder.html">AttributeBuilder</a></li><li><a href="AttributeIterator.html">AttributeIterator</a></li><li><a href="AttributeLocalization.html">AttributeLocalization</a></li><li><a href="AttributeRenderer.html">AttributeRenderer</a></li><li><a href="Layout.html">Layout</a></li><li><a href="LocalizationParser.html">LocalizationParser</a></li><li><a href="Model.html">Model</a></li><li><a href="ModelBuilder.html">ModelBuilder</a></li><li><a href="ModelLocalization.html">ModelLocalization</a></li><li><a href="ModelRenderer.html">ModelRenderer</a></li><li><a href="ModelStructureParser.html">ModelStructureParser</a></li><li><a href="NutformsApiAspectsSource.html">NutformsApiAspectsSource</a></li><li><a href="Observable.html">Observable</a></li><li><a href="Relation.html">Relation</a></li><li><a href="RelationBuilder.html">RelationBuilder</a></li><li><a href="ValuesParser.html">ValuesParser</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Attribute.html">Attribute</a></li><li><a href="AttributeBuilder.html">AttributeBuilder</a></li><li><a href="AttributeIterator.html">AttributeIterator</a></li><li><a href="AttributeLocalization.html">AttributeLocalization</a></li><li><a href="AttributeRenderer.html">AttributeRenderer</a></li><li><a href="Layout.html">Layout</a></li><li><a href="LocalizationParser.html">LocalizationParser</a></li><li><a href="Model.html">Model</a></li><li><a href="ModelBuilder.html">ModelBuilder</a></li><li><a href="ModelLocalization.html">ModelLocalization</a></li><li><a href="ModelRenderer.html">ModelRenderer</a></li><li><a href="ModelStructureParser.html">ModelStructureParser</a></li><li><a href="Nutforms.html">Nutforms</a></li><li><a href="NutformsApiAspectsSource.html">NutformsApiAspectsSource</a></li><li><a href="Observable.html">Observable</a></li><li><a href="Relation.html">Relation</a></li><li><a href="RelationBuilder.html">RelationBuilder</a></li><li><a href="Submit.html">Submit</a></li><li><a href="ValuesParser.html">ValuesParser</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed May 11 2016 19:52:12 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun May 15 2016 11:34:00 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
