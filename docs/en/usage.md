@@ -62,7 +62,9 @@ concrete widgets to the layout.
 
 You c an use the following tag attributes:
 - `nf-form-label` - To denote tag, into which the localized form label is injected
-- `nf-field-widget="<attributeName>"` - To denote tag, into which attribute's widget is injected
+- `nf-field-widget="<attributeName>"` - To denote tag, into which concrete attribute's widget is injected
+- `nf-field-widget` - To denote tag, into which any remaining attribute's widget is injected
+- `nf-field-iterator` - To denote tag which's inner content will be repeated and attributes will e injected into it until there are no attributes left. See [example](https://github.com/jSquirrel/nutforms-example/blob/master/src/main/resources/layout/common/two-column.html).
 
 ```html
 <form class="form" role="form">
