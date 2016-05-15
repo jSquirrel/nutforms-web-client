@@ -1,7 +1,7 @@
 # Nuforms Web Client
 
 [![Build Status](https://travis-ci.org/jSquirrel/nutforms-web-client.svg?branch=master)](https://travis-ci.org/jSquirrel/nutforms-web-client)
-[![NPM](https://img.shields.io/npm/v/nutforms-web.svg)](https://www.npmjs.com/package/nutforms-web)
+[![NPM](https://img.shields.io/npm/v/nutforms-web-client.svg)](https://www.npmjs.com/package/nutforms-web-client)
 
 Automatic aspect-oriented form generation for web applications.
 
