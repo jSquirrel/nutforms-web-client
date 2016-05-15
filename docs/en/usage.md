@@ -69,9 +69,8 @@ You c an use the following tag attributes:
 ```html
 <form class="form" role="form">
     <h1 nf-form-label="nf-form-label"></h1>
-    <div nf-field-widget="id"></div>
-    <div nf-field-widget="description"></div>
-    <div nf-field-widget="log"></div>
+    <div nf-field-widget="id"></div> <!-- attribute with name "id" will be rendered here -->
+    <!-- other attributes will be rendered here -->
 </form>
 ```
 
