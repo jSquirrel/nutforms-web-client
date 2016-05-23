@@ -7,10 +7,20 @@ Automatic aspect-oriented form generation for web applications.
 
 ## Installation
 
-You can install the library via `npm`.
+You can install the library via `npm` to use it on your project.
 
 ```
 $ npm install nutforms-web-client --save
+```
+
+## Developing
+
+If you want to develop the library, clone it via git and install npm dependencies:
+
+```
+$ git clone git@github.com:jSquirrel/nutforms-web-client.git ./nutforms-web-client
+$ cd ./nutforms-web-client
+$ npm install
 ```
 
 ## Running tests
